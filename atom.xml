@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Vita John - Python Programmer]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="vita.lol/"/>
-  <updated>2015-11-07T13:46:35.000Z</updated>
+  <updated>2015-11-07T14:19:00.000Z</updated>
   <id>vita.lol/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="vita.lol/2015/11/04/%E8%99%9A%E4%BC%AA%E7%9A%84%E5%81%87%E9%9D%A2/"/>
     <id>vita.lol/2015/11/04/虚伪的假面/</id>
     <published>2015-11-03T18:00:00.000Z</published>
-    <updated>2015-11-07T13:46:35.000Z</updated>
+    <updated>2015-11-07T14:19:00.000Z</updated>
     <content type="html"><![CDATA[<p>&lt;&lt;传颂之物 虚伪的假面&gt;&gt; ED <a href="http://music.163.com/#/m/song?id=36198064" target="_blank" rel="external">ユメカウツツカ</a> 实在是太赞了, 有种令人怀念的故乡气息, 又像是无限延伸的悠长梦境, 使人沉醉其中不知是梦是幻。</p>
 <p><center><audio controls><br>  <source src="/audio/Suara - ユメカウツツカ.mp3" type="audio/mpeg"><br>Your browser does not support the audio element.<br></audio></center></p>
 <p><center>久远的笑容就由我来守护</center><br><img src="/images/jiuyuan_smile.png" alt="久远的笑容就由我来守护">.</p>
@@ -27,6 +27,8 @@
     <summary type="html">
     <![CDATA[<p>&lt;&lt;传颂之物 虚伪的假面&gt;&gt; ED <a href="http://music.163.com/#/m/song?id=36198064" target="_blank" rel="external">ユメカウツツカ</a> 实在是太赞了, 有种令人]]>
     </summary>
+    
+      <category term="ACG" scheme="vita.lol/tags/ACG/"/>
     
   </entry>
   
