@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[Hexo]]></title>
-  
+  <title><![CDATA[Welcome to Vita's blog]]></title>
+  <subtitle><![CDATA[Vita John - Python Programmer]]></subtitle>
   <link href="/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
+  <link href="vita.lol/"/>
   <updated>2015-11-07T13:46:35.000Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>vita.lol/</id>
   
   <author>
-    <name><![CDATA[John Doe]]></name>
+    <name><![CDATA[Vita John]]></name>
     
   </author>
   
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[虚伪的假面]]></title>
-    <link href="http://yoursite.com/2015/11/04/%E8%99%9A%E4%BC%AA%E7%9A%84%E5%81%87%E9%9D%A2/"/>
-    <id>http://yoursite.com/2015/11/04/虚伪的假面/</id>
+    <link href="vita.lol/2015/11/04/%E8%99%9A%E4%BC%AA%E7%9A%84%E5%81%87%E9%9D%A2/"/>
+    <id>vita.lol/2015/11/04/虚伪的假面/</id>
     <published>2015-11-03T18:00:00.000Z</published>
     <updated>2015-11-07T13:46:35.000Z</updated>
     <content type="html"><![CDATA[<p>&lt;&lt;传颂之物 虚伪的假面&gt;&gt; ED <a href="http://music.163.com/#/m/song?id=36198064" target="_blank" rel="external">ユメカウツツカ</a> 实在是太赞了, 有种令人怀念的故乡气息, 又像是无限延伸的悠长梦境, 使人沉醉其中不知是梦是幻。</p>
