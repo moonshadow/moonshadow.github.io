@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Vita John - Python Programmer]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="vita.lol/"/>
-  <updated>2016-02-19T08:26:14.000Z</updated>
+  <updated>2015-11-07T14:40:31.000Z</updated>
   <id>vita.lol/</id>
   
   <author>
@@ -13,19 +13,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="vita.lol/2016/03/13/asyncio_exploring/"/>
-    <id>vita.lol/2016/03/13/asyncio_exploring/</id>
-    <published>2016-03-12T20:31:58.000Z</published>
-    <updated>2016-02-19T08:26:14.000Z</updated>
-    <content type="html"></content>
-    <summary type="html">
-    
-    </summary>
-    
-  </entry>
   
   <entry>
     <title><![CDATA[虚伪的假面]]></title>
