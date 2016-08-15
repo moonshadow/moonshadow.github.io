@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Welcome to moonshadow&#39;s blog</title>
+  <subtitle>Wang Haowei - Python Programmer</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="imiliya.com/"/>
+  <updated>2016-08-15T22:59:34.000Z</updated>
+  <id>imiliya.com/</id>
+  
+  <author>
+    <name>Wang Haowei</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>py_ext</title>
+    <link href="imiliya.com/2016/08/16/py-ext/"/>
+    <id>imiliya.com/2016/08/16/py-ext/</id>
+    <published>2016-08-16T00:45:36.000Z</published>
+    <updated>2016-08-15T22:59:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>py ext </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;py ext &lt;/p&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
