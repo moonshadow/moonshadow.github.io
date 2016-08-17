@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="imiliya.com/"/>
-  <updated>2016-08-17T22:43:26.000Z</updated>
+  <updated>2016-08-17T22:50:19.000Z</updated>
   <id>imiliya.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="imiliya.com/2016/08/16/py-ext/"/>
     <id>imiliya.com/2016/08/16/py-ext/</id>
     <published>2016-08-16T00:45:36.000Z</published>
-    <updated>2016-08-17T22:43:26.000Z</updated>
+    <updated>2016-08-17T22:50:19.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="写博客的动机"><a href="#写博客的动机" class="headerlink" title="写博客的动机"></a>写博客的动机</h2><p>当了这么久的程序员，中间有好几次也想过开个博客写点什么。可是一来觉得自己太菜，再又实在过于怠惰，计划就搁置一旁(买了个域名躺了一年😂)。 然而一直以来看了各路大侠的博客，偷偷学到不少东西, 感觉好像也没那么菜了，也觉着应该把自己的一些想法和见解分享出去，回馈社会, 而不是在自己的脑子里面憋着， 即使被打脸也算是又学到了嘛, 何乐而不为。</p>
 <p>在下一介Python程序员, 而且是<em>真のPython粉</em>，那就从Python写起吧, 也比较得心应手一点。现今市面上充斥各种Python教程(Python也真是太简单易上手了), 我就不去凑这个热闹也讲些Python基础或者<em>tips</em>什么的了。将要讲到的内容都是面向至少中级的Python程序员的. 所以读者最好是具备一定的Python水平，如果是刚入门的小朋友, 至少先买两本入门教程撸一遍再来吧，请点击右上角不送。</p>
@@ -69,7 +69,7 @@ C 版本100000次的factorial(10)时间
 0.07990392099600285
 </code></pre><p>大概4倍的样子, very nice!</p>
 <p>第一个例子就到这里了，ctypes打开了Python调用c代码库的大门。 然而很多时候并没有现成的c库给我们调， 那么就需要自己写Python的C Extension了，下一篇我们先研究一下如何裸写一个Python的C extension模块吧.</p>
-<p>上面示例的代码已经放到<a href="https://github.com/moonshadow/way-to-python-ninja" target="_blank" rel="external"><strong>github</strong></a>上面了，可以拉下来参照[<strong>ctypes</strong>]的文档自己玩玩, 如果你有更好的sample或者建议欢迎一起交流.</p>
+<p>上面示例的代码已经放到<a href="https://github.com/moonshadow/way-to-python-ninja" target="_blank" rel="external"><strong>github</strong></a>上面了，可以拉下来参照<a href="https://docs.python.org/3.5/library/ctypes.html#module-ctypes" target="_blank" rel="external"><strong>ctypes</strong></a>的文档自己玩玩, 如果你有更好的sample或者建议欢迎一起交流.</p>
 ]]></content>
     
     <summary type="html">
