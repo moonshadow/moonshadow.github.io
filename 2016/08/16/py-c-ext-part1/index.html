@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Python,C," />
 
 
 
@@ -86,15 +86,19 @@
 
 
 
-<meta name="description" content="Write about Python, Linux, ACG and other interesting stuffs.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wang Haowei - Python Programmer">
-<meta property="og:url" content="imiliya.com/index.html">
+<meta name="description" content="写博客的动机当了这么久的程序员，中间有好几次也想过开个博客写点什么。可是一来觉得自己太菜，再又实在过于怠惰，计划就搁置一旁(买了个域名躺了一年😂)。 然而一直以来看了各路大侠的博客，偷偷学到不少东西, 感觉好像也没那么菜了，也觉着应该把自己的一些想法和见解分享出去，回馈社会, 而不是在自己的脑子里面憋着， 即使被打脸也算是又学到了嘛, 何乐而不为。
+在下一介Python程序员, 而且是真のPyt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="An Introduction to Python C Extension Programming (Part1)">
+<meta property="og:url" content="imiliya.com/2016/08/16/py-c-ext-part1/index.html">
 <meta property="og:site_name" content="Wang Haowei - Python Programmer">
-<meta property="og:description" content="Write about Python, Linux, ACG and other interesting stuffs.">
+<meta property="og:description" content="写博客的动机当了这么久的程序员，中间有好几次也想过开个博客写点什么。可是一来觉得自己太菜，再又实在过于怠惰，计划就搁置一旁(买了个域名躺了一年😂)。 然而一直以来看了各路大侠的博客，偷偷学到不少东西, 感觉好像也没那么菜了，也觉着应该把自己的一些想法和见解分享出去，回馈社会, 而不是在自己的脑子里面憋着， 即使被打脸也算是又学到了嘛, 何乐而不为。
+在下一介Python程序员, 而且是真のPyt">
+<meta property="og:updated_time" content="2016-08-18T08:57:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wang Haowei - Python Programmer">
-<meta name="twitter:description" content="Write about Python, Linux, ACG and other interesting stuffs.">
+<meta name="twitter:title" content="An Introduction to Python C Extension Programming (Part1)">
+<meta name="twitter:description" content="写博客的动机当了这么久的程序员，中间有好几次也想过开个博客写点什么。可是一来觉得自己太菜，再又实在过于怠惰，计划就搁置一旁(买了个域名躺了一年😂)。 然而一直以来看了各路大侠的博客，偷偷学到不少东西, 感觉好像也没那么菜了，也觉着应该把自己的一些想法和见解分享出去，回馈社会, 而不是在自己的脑子里面憋着， 即使被打脸也算是又学到了嘛, 何乐而不为。
+在下一介Python程序员, 而且是真のPyt">
 
 
 
@@ -115,9 +119,9 @@
 
 
 
-  <link rel="canonical" href="imiliya.com/"/>
+  <link rel="canonical" href="imiliya.com/2016/08/16/py-c-ext-part1/"/>
 
-  <title> Wang Haowei - Python Programmer </title>
+  <title> An Introduction to Python C Extension Programming (Part1) | Wang Haowei - Python Programmer </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -138,9 +142,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -227,9 +229,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -249,110 +251,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/08/19/py-c-ext-part2/" itemprop="url">
-                  py-c-ext-part2
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-18T23:02:11+06:00" content="2016-08-18">
-              2016-08-18
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/19/py-c-ext-part2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/19/py-c-ext-part2/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/16/py-c-ext-part1/" itemprop="url">
-                  An Introduction to Python C Extension Programming (Part1)
-                </a>
+                An Introduction to Python C Extension Programming (Part1)
               
             
           </h1>
@@ -418,9 +317,7 @@
       
 
       
-        
-          
-            <h2 id="写博客的动机"><a href="#写博客的动机" class="headerlink" title="写博客的动机"></a>写博客的动机</h2><p>当了这么久的程序员，中间有好几次也想过开个博客写点什么。可是一来觉得自己太菜，再又实在过于怠惰，计划就搁置一旁(买了个域名躺了一年😂)。 然而一直以来看了各路大侠的博客，偷偷学到不少东西, 感觉好像也没那么菜了，也觉着应该把自己的一些想法和见解分享出去，回馈社会, 而不是在自己的脑子里面憋着， 即使被打脸也算是又学到了嘛, 何乐而不为。</p>
+        <h2 id="写博客的动机"><a href="#写博客的动机" class="headerlink" title="写博客的动机"></a>写博客的动机</h2><p>当了这么久的程序员，中间有好几次也想过开个博客写点什么。可是一来觉得自己太菜，再又实在过于怠惰，计划就搁置一旁(买了个域名躺了一年😂)。 然而一直以来看了各路大侠的博客，偷偷学到不少东西, 感觉好像也没那么菜了，也觉着应该把自己的一些想法和见解分享出去，回馈社会, 而不是在自己的脑子里面憋着， 即使被打脸也算是又学到了嘛, 何乐而不为。</p>
 <p>在下一介Python程序员, 而且是<em>真のPython粉</em>，那就从Python写起吧, 也比较得心应手一点。现今市面上充斥各种Python教程(Python也真是太简单易上手了), 我就不去凑这个热闹也讲些Python基础或者<em>tips</em>什么的了。将要讲到的内容都是面向至少中级的Python程序员的. 所以读者最好是具备一定的Python水平，如果是刚入门的小朋友, 至少先买两本入门教程撸一遍再来吧，请点击右上角不送。</p>
 <p>暂定的系列有</p>
 <ol>
@@ -469,36 +366,61 @@ C 版本100000次的factorial(10)时间
 <p>第一个例子就到这里了，ctypes打开了Python调用c代码库的大门。 然而很多时候并没有现成的c库给我们调， 那么就需要自己写Python的C Extension了，下一篇我们先研究一下如何裸写一个Python的C extension模块吧.</p>
 <p>上面示例的代码已经放到<a href="https://github.com/moonshadow/way-to-python-ninja" target="_blank" rel="external"><strong>github</strong></a>上面了，可以拉下来参照<a href="https://docs.python.org/3.5/library/ctypes.html#module-ctypes" target="_blank" rel="external"><strong>ctypes</strong></a>的文档自己玩玩, 如果你有更好的sample或者建议欢迎一起交流.</p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag">#Python</a>
+          
+            <a href="/tags/C/" rel="tag">#C</a>
+          
+        </div>
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/19/py-c-ext-part2/" rel="prev" title="py-c-ext-part2">
+                py-c-ext-part2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -506,6 +428,17 @@ C 版本100000次的factorial(10)时间
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -525,8 +458,17 @@ C 版本100000次的factorial(10)时间
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -603,6 +545,17 @@ C 版本100000次的factorial(10)时间
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写博客的动机"><span class="nav-number">1.</span> <span class="nav-text">写博客的动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#First-of-first-Python-C-Extension"><span class="nav-number">2.</span> <span class="nav-text">First of first (Python C Extension)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#why-C"><span class="nav-number">3.</span> <span class="nav-text">why C?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-call-C-function-in-Python-code"><span class="nav-number">4.</span> <span class="nav-text">How to call C function in Python code?</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -706,6 +659,10 @@ C 版本100000次的factorial(10)时间
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
@@ -722,9 +679,9 @@ C 版本100000次的factorial(10)时间
 
     <script type="text/javascript">
       var disqus_shortname = 'imiliya';
-      var disqus_identifier = 'index.html';
-      var disqus_title = "";
-      var disqus_url = '';
+      var disqus_identifier = '2016/08/16/py-c-ext-part1/';
+      var disqus_title = "An Introduction to Python C Extension Programming (Part1)";
+      var disqus_url = 'imiliya.com/2016/08/16/py-c-ext-part1/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
@@ -735,6 +692,8 @@ C 版本100000次的factorial(10)时间
       }
 
       run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
       
     </script>
   
