@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="imiliya.com/"/>
-  <updated>2016-08-18T15:02:11.000Z</updated>
+  <updated>2016-08-18T15:05:49.000Z</updated>
   <id>imiliya.com/</id>
   
   <author>
@@ -16,25 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>py-c-ext-part2</title>
-    <link href="imiliya.com/2016/08/19/py-ext/"/>
-    <id>imiliya.com/2016/08/19/py-ext/</id>
-    <published>2016-08-18T17:02:11.000Z</published>
-    <updated>2016-08-18T15:02:11.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>An Introduction to Python C Extension Programming (Part1)</title>
-    <link href="imiliya.com/2016/08/16/py-c-ext-part1/"/>
-    <id>imiliya.com/2016/08/16/py-c-ext-part1/</id>
+    <link href="imiliya.com/2016/08/16/py-ext/"/>
+    <id>imiliya.com/2016/08/16/py-ext/</id>
     <published>2016-08-16T00:45:36.000Z</published>
-    <updated>2016-08-18T08:57:30.000Z</updated>
+    <updated>2016-08-18T15:05:49.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="写博客的动机"><a href="#写博客的动机" class="headerlink" title="写博客的动机"></a>写博客的动机</h2><p>当了这么久的程序员，中间有好几次也想过开个博客写点什么。可是一来觉得自己太菜，再又实在过于怠惰，计划就搁置一旁(买了个域名躺了一年😂)。 然而一直以来看了各路大侠的博客，偷偷学到不少东西, 感觉好像也没那么菜了，也觉着应该把自己的一些想法和见解分享出去，回馈社会, 而不是在自己的脑子里面憋着， 即使被打脸也算是又学到了嘛, 何乐而不为。</p>
 <p>在下一介Python程序员, 而且是<em>真のPython粉</em>，那就从Python写起吧, 也比较得心应手一点。现今市面上充斥各种Python教程(Python也真是太简单易上手了), 我就不去凑这个热闹也讲些Python基础或者<em>tips</em>什么的了。将要讲到的内容都是面向至少中级的Python程序员的. 所以读者最好是具备一定的Python水平，如果是刚入门的小朋友, 至少先买两本入门教程撸一遍再来吧，请点击右上角不送。</p>
