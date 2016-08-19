@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="imiliya.com/"/>
-  <updated>2016-08-19T14:53:40.000Z</updated>
+  <updated>2016-08-19T15:12:30.000Z</updated>
   <id>imiliya.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="imiliya.com/2016/08/19/py-c-ext-part2/"/>
     <id>imiliya.com/2016/08/19/py-c-ext-part2/</id>
     <published>2016-08-18T17:06:53.000Z</published>
-    <updated>2016-08-19T14:53:40.000Z</updated>
+    <updated>2016-08-19T15:12:30.000Z</updated>
     
     <content type="html"><![CDATA[<p>TL; DR.</p>
 <h2 id="什么是Python-C-Extension？"><a href="#什么是Python-C-Extension？" class="headerlink" title="什么是Python C Extension？"></a>什么是Python C Extension？</h2><p>所谓<a href="https://docs.python.org/3/extending/extending.html" target="_blank" rel="external">Python C Extension</a>， 是指在CPython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的皮，好让Python程序像import其他普通Python模块一样来使用这个C library.</p>
@@ -59,7 +59,7 @@
 </code></pre><p>结果会在终端打印当前目录下的文件。</p>
 <p>如果想安装到site-packages下面， 运行<code>python3 setup.py install</code>， 然后就可以在其他项目也能直接import spam模块了。</p>
 <p><em>Extension</em> 类的 <em>__init__</em> 方法还接受很多其他的参数: <em>include_dirs</em> 指定包含头文件的路径， <em>define_macros</em> 定义一些宏，<em>library_dirs</em> 指定动态链接的目录, 相当于gcc的 <em>-L</em> 选项，libraries 指定链接的库，相当与gcc的 <em>-l</em> 选项。还有其他一些参数读者请自行参考<a href="https://docs.python.org/3.5/distutils/apiref.html#distutils.core.Extension" target="_blank" rel="external">distutils</a>。</p>
-<h2 id="错误和异常-Errors-and-Exception"><a href="#错误和异常-Errors-and-Exception" class="headerlink" title="错误和异常(Errors and Exception)"></a>错误和异常(Errors and Exception)</h2><p>Python解释器有一个不成文的规定， 当函数失败的时候，需要设置一个异常信息，并且返回错误值，异常信息保存在解释器的一个静态全局变量中。如果这个变量的值为NULL，说明没有异常发生。除此之外还有两个全局变量，一个保存了异常信息对应的描述，另一个保存了发生异常时的整个调用堆栈, 它们对应了sys.exc_info()结果的三个元素。</p>
+<h2 id="错误和异常-Errors-and-Exception"><a href="#错误和异常-Errors-and-Exception" class="headerlink" title="错误和异常(Errors and Exception)"></a>错误和异常(Errors and Exception)</h2><p>Python解释器有一个不成文的规定， 当函数失败的时候，需要设置一个异常信息，并且返回错误值，异常信息保存在解释器的一个静态全局变量中。如果这个变量的值为NULL(空指针)，说明没有异常发生。除此之外还有两个全局变量，一个保存了异常信息对应的描述，另一个保存了发生异常时的整个调用堆栈, 它们对应了sys.exc_info()结果的三个元素。</p>
 <p>前面用到的PyErr_SetString()方法，第一个参数就是我们定义的异常类对象,第二个参数是关联的异常信息描述。 <em>PyErr_SetString(SpamError, “System command failed”)</em> 设置了全局的异常信息,Python解释器发现这个异常信息的时候，会跳转到异常处理流程(如果想了解Python解释器是怎么运作的, 异常机制又是如何实现的，再次推荐《Python源码剖析》这本书)。</p>
 <h2 id="一点题外话——引用计数-Reference-Counts"><a href="#一点题外话——引用计数-Reference-Counts" class="headerlink" title="一点题外话——引用计数(Reference Counts)"></a>一点题外话——引用计数(Reference Counts)</h2><p>C和C++要求程序员负责动态的分配和回收堆上的内存，C语言提供了malloc()和free()函数(C++对应有new和delete操作符)。</p>
 <p>每一个malloc()分配的内存资源， 最终都需要通过调用free()来回收, 如果忘记了free， 被分配的内存资源直到进程退出都无法重新利用，这就是所谓的内存泄漏(memory leak)。如果继续使用free()过的内存， 很有可能和以后通过malloc()重新分配的内存资源冲突，会造成同引用没有初始化的指针一样的结果，core dumps, 错误的结果，进程莫名崩溃之类。</p>
@@ -97,6 +97,7 @@
 <p>对于上面的例子，Python的GIL保证了这个函数调用过程不会被其他线程打断,因此我们不必担心被borrow的引用item在另一个线程被回收了（比如在另一个thread调用了PyList_SetItem，里面又做了减少item引用计数的事情（论GIL的重要性). 但是python提供了Py_BEGIN_ALLOW_THREADS这个宏来暂时解除全局锁，看看下面的这个代码</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span></span></div><div class="line"><span class="title">bug</span><span class="params">(PyObject *<span class="built_in">list</span>)</span></div><div class="line">&#123;</div><div class="line">    PyObject *item = PyList_GetItem(<span class="built_in">list</span>, <span class="number">0</span>);</div><div class="line">    Py_BEGIN_ALLOW_THREADS</div><div class="line">    ...some blocking I/O call...</div><div class="line">    <span class="function">Py_END_ALLOW_THREADS</span></div><div class="line">    <span class="title">PyObject_Print</span><span class="params">(item, <span class="built_in">stdout</span>, <span class="number">0</span>)</span>; <span class="comment">/* BUG! */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Py_BEGIN_ALLOW_THREADS和Py_END_ALLOW_THREADS之间，GIL被释放了，于是item就有可能在另一个线程被回收掉，后面在执行 PyObject_Print就可能产生意想不到的bug!</p>
+<p>用borrow还是own其实并没有明确的规定，取决于那个模型在特定场景下使用更加方便，我们可以通过官方文档知道某个Python C API的函数具体用的borrow还是own。</p>
 <p>讲了这么多引用计数的东西好像已经偏题了, 看得出来在C Extension里面对引用计数的处理也是一件比较tricky的事情。如果你对这块很感兴趣，直接阅读<a href="https://docs.python.org/3/extending/extending.html" target="_blank" rel="external">官方文档</a>是一个不错的选择, 这篇文章<a href="http://edcjones.tripod.com/refcount.html" target="_blank" rel="external">http://edcjones.tripod.com/refcount.html</a>则做了一定的解释和补充。 please keep reading patiently!</p>
 <p>如果你对 <em>borrow</em>，<em>own</em> 这一块很感兴趣 ,隔壁有一门叫做<a href="https://doc.rust-lang.org" target="_blank" rel="external">Rust</a>的语言值得尝试, 可以看看它的 <em>ownership system</em> 是怎么玩的。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>简单的讲, 实现一个C Extension模块要做好三件事情</p>
