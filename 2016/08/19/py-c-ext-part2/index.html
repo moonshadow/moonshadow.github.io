@@ -2,7 +2,7 @@
 
 
 
-  
+
 
 
 <html class="theme-next pisces use-motion">
@@ -27,36 +27,36 @@
 
 
 
-  
-  
+
+
   <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  
-  
-  
-  
 
-  
-    
-    
-  
 
-  
 
-  
 
-  
 
-  
 
-  
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
+
 
 
 
@@ -86,16 +86,19 @@
 
 
 
-<meta name="description" content="什么是Python C Extension？ TL; DR.所谓Python C Extension， 是指在Cpython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的">
+<meta name="description" content="TL; DR.
+什么是Python C Extension？所谓Python C Extension， 是指在Cpython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="An Introduction to Python C Extension Programming (Part2)">
 <meta property="og:url" content="imiliya.com/2016/08/19/py-c-ext-part2/index.html">
 <meta property="og:site_name" content="Wang Haowei - Python Programmer">
-<meta property="og:description" content="什么是Python C Extension？ TL; DR.所谓Python C Extension， 是指在Cpython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的">
-<meta property="og:updated_time" content="2016-08-19T04:48:34.000Z">
+<meta property="og:description" content="TL; DR.
+什么是Python C Extension？所谓Python C Extension， 是指在Cpython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的">
+<meta property="og:updated_time" content="2016-08-19T04:49:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="An Introduction to Python C Extension Programming (Part2)">
-<meta name="twitter:description" content="什么是Python C Extension？ TL; DR.所谓Python C Extension， 是指在Cpython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的">
+<meta name="twitter:description" content="TL; DR.
+什么是Python C Extension？所谓Python C Extension， 是指在Cpython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的">
 
 
 
@@ -123,7 +126,6 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  
 
 
 
@@ -134,17 +136,18 @@
 
 
 
-  
-  
-    
-  
+
+
+
+
+
 
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
-  
+
 
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
@@ -165,57 +168,57 @@
 </div>
 
 <nav class="site-nav">
-  
 
-  
+
+
     <ul id="menu" class="menu">
-      
-        
+
+
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            
+
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
+
             首页
           </a>
         </li>
-      
-        
+
+
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
-            
+
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
+
             分类
           </a>
         </li>
-      
-        
+
+
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
-            
+
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
+
             归档
           </a>
         </li>
-      
-        
+
+
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
-            
+
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
+
             标签
           </a>
         </li>
-      
 
-      
+
+
     </ul>
-  
 
-  
+
+
 </nav>
 
  </div>
@@ -225,34 +228,34 @@
       <div class="main-inner">
         <div class="content-wrap">
           <div id="content" class="content">
-            
+
 
   <div id="posts" class="posts-expand">
-    
 
-  
-  
 
-  
-  
-  
+
+
+
+
+
+
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
-    
+
       <header class="post-header">
 
-        
-        
+
+
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+
+
+
                 An Introduction to Python C Extension Programming (Part2)
-              
-            
+
+
           </h1>
-        
+
 
         <div class="post-meta">
           <span class="post-time">
@@ -265,56 +268,57 @@
             </time>
           </span>
 
-          
+
             <span class="post-category" >
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-              
+
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Programming/" itemprop="url" rel="index">
                     <span itemprop="name">Programming</span>
                   </a>
                 </span>
 
-                
-                
 
-              
+
+
+
             </span>
-          
 
-          
-            
+
+
+
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="/2016/08/19/py-c-ext-part2/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/19/py-c-ext-part2/" itemprop="commentsCount"></span>
                 </a>
               </span>
-            
-          
 
-          
 
-          
-          
 
-          
+
+
+
+
+
+
         </div>
       </header>
-    
+
 
 
     <div class="post-body" itemprop="articleBody">
 
-      
-      
 
-      
-        <h2 id="什么是Python-C-Extension？-TL-DR"><a href="#什么是Python-C-Extension？-TL-DR" class="headerlink" title="什么是Python C Extension？ TL; DR."></a>什么是Python C Extension？ TL; DR.</h2><p>所谓<a href="https://docs.python.org/3/extending/extending.html" target="_blank" rel="external">Python C Extension</a>， 是指在Cpython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的皮，好让Python程序像import其他普通Python模块一样来使用这个C library.</p>
+
+
+
+        <p>TL; DR.</p>
+<h2 id="什么是Python-C-Extension？"><a href="#什么是Python-C-Extension？" class="headerlink" title="什么是Python C Extension？"></a>什么是Python C Extension？</h2><p>所谓<a href="https://docs.python.org/3/extending/extending.html" target="_blank" rel="external">Python C Extension</a>， 是指在Cpython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的皮，好让Python程序像import其他普通Python模块一样来使用这个C library.</p>
 <h2 id="简单实现"><a href="#简单实现" class="headerlink" title="简单实现"></a>简单实现</h2><p>我们直接看官方文档的例子来写一个extension 模块吧(偷个懒，这篇文章我就当官方文档的搬运工了)。</p>
 <p>创建<code>main.py</code>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> spam</div><div class="line"></div><div class="line">status = spam.system(<span class="string">'ls -l'</span>)</div></pre></td></tr></table></figure>
@@ -403,84 +407,84 @@
 <p><a href="https://github.com/moonshadow/way-to-python-ninja/tree/master/python-c-ext/impl-python-c-ext" target="_blank" rel="external">相关代码</a></p>
 <p>Anyway, 手动实现一个Python C Extension始终是一件很麻烦的事(还要了解Python的引用计数是怎么玩的)。如果只是简单系统调用，用<code>ctypes</code>就能直接搞定， 那专心写好C代码，然后直接让Python像用普通模块一样把它用起来岂不是更加方便？ 下一篇我们就来看看一个叫做CFFI的第三方库又是怎么实现在Python中调用C语言库的吧。</p>
 
-      
+
     </div>
 
     <div>
-      
-        
 
-      
+
+
+
     </div>
 
     <div>
-      
-        
 
-      
+
+
+
     </div>
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Python/" rel="tag">#Python</a>
-          
-            <a href="/tags/C/" rel="tag">#C</a>
-          
-        </div>
-      
 
-      
+        <div class="post-tags">
+
+            <a href="/tags/Python/" rel="tag">#Python</a>
+
+            <a href="/tags/C/" rel="tag">#C</a>
+
+        </div>
+
+
+
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-            
+
               <a href="/2016/08/16/py-ext/" rel="next" title="An Introduction to Python C Extension Programming (Part1)">
                 <i class="fa fa-chevron-left"></i> An Introduction to Python C Extension Programming (Part1)
               </a>
-            
+
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
+
           </div>
         </div>
-      
 
-      
-      
+
+
+
     </footer>
   </article>
 
 
 
     <div class="post-spread">
-      
+
     </div>
   </div>
 
 
           </div>
-          
 
 
-          
+
+
   <div class="comments" id="comments">
-    
+
       <div id="disqus_thread">
         <noscript>
           Please enable JavaScript to view the
           <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
         </noscript>
       </div>
-    
+
   </div>
 
 
         </div>
-        
-          
-  
+
+
+
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
       <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
@@ -492,9 +496,9 @@
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
 
-      
 
-      
+
+
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
@@ -503,7 +507,7 @@
             站点概览
           </li>
         </ul>
-      
+
 
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -521,93 +525,93 @@
             </a>
           </div>
 
-          
+
             <div class="site-state-item site-state-categories">
               <a href="/categories">
                 <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
-          
 
-          
+
+
             <div class="site-state-item site-state-tags">
               <a href="/tags">
                 <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
-          
+
 
         </nav>
 
-        
+
           <div class="feed-link motion-element">
             <a href="/atom.xml" rel="alternate">
               <i class="fa fa-rss"></i>
               RSS
             </a>
           </div>
-        
+
 
         <div class="links-of-author motion-element">
-          
-            
+
+
               <span class="links-of-author-item">
                 <a href="https://github.com/moonshadow" target="_blank" title="github">
-                  
+
                     <i class="fa fa-fw fa-globe"></i>
-                  
+
                   github
                 </a>
               </span>
-            
+
               <span class="links-of-author-item">
                 <a href="https://twitter.com/moonshadow520" target="_blank" title="twitter">
-                  
+
                     <i class="fa fa-fw fa-globe"></i>
-                  
+
                   twitter
                 </a>
               </span>
-            
-          
+
+
         </div>
 
-        
-        
 
-        
-        
+
+
+
+
 
       </section>
 
-      
+
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Python-C-Extension？-TL-DR"><span class="nav-number">1.</span> <span class="nav-text">什么是Python C Extension？ TL; DR.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单实现"><span class="nav-number">2.</span> <span class="nav-text">简单实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误和异常-Errors-and-Exception"><span class="nav-number">3.</span> <span class="nav-text">错误和异常(Errors and Exception)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一点题外话——引用计数-Reference-Counts"><span class="nav-number">4.</span> <span class="nav-text">一点题外话——引用计数(Reference Counts)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference-Counting-in-Python"><span class="nav-number">4.1.</span> <span class="nav-text">Reference Counting in Python</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
-            
+
+
+
+
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Python-C-Extension？"><span class="nav-number">1.</span> <span class="nav-text">什么是Python C Extension？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单实现"><span class="nav-number">2.</span> <span class="nav-text">简单实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误和异常-Errors-and-Exception"><span class="nav-number">3.</span> <span class="nav-text">错误和异常(Errors and Exception)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一点题外话——引用计数-Reference-Counts"><span class="nav-number">4.</span> <span class="nav-text">一点题外话——引用计数(Reference Counts)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference-Counting-in-Python"><span class="nav-number">4.1.</span> <span class="nav-text">Reference Counting in Python</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+
           </div>
         </section>
-      
+
 
     </div>
   </aside>
 
 
-        
+
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright" >
-  
-  &copy; 
+
+  &copy;
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -626,9 +630,9 @@
   </a>
 </div>
 
-        
 
-        
+
+
       </div>
     </footer>
 
@@ -637,7 +641,7 @@
     </div>
   </div>
 
-  
+
 
 <script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
@@ -653,30 +657,30 @@
 
 
 
-  
 
 
 
-  
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  
+
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  
+
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  
+
   <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
 
-  
+
   <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-  
+
   <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
-  
+
 
 
   <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
@@ -685,8 +689,8 @@
 
 
 
-  
-  
+
+
 
 
   <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
@@ -695,30 +699,30 @@
 
 
 
-  
+
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
 
 
 
-  
+
 
 
   <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
 
 
 
-  
 
 
 
-  
+
+
 
     <script type="text/javascript">
       var disqus_shortname = 'imiliya';
       var disqus_identifier = '2016/08/19/py-c-ext-part2/';
       var disqus_title = "An Introduction to Python C Extension Programming (Part2)";
-      var disqus_url = 'imiliya.com/2016/08/19/py-c-ext-part2/';
+      var disqus_url = 'http://imiliya.com/2016/08/19/py-c-ext-part2/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
@@ -729,23 +733,23 @@
       }
 
       run_disqus_script('count.js');
-      
+
         run_disqus_script('embed.js');
-      
+
     </script>
-  
 
 
 
 
-  
-  
 
-  
 
-  
 
-  
+
+
+
+
+
+
 
 </body>
 </html>
