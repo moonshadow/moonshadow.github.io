@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="imiliya.com/"/>
-  <updated>2016-08-19T14:41:02.000Z</updated>
+  <updated>2016-08-19T14:51:28.000Z</updated>
   <id>imiliya.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="imiliya.com/2016/08/19/py-c-ext-part2/"/>
     <id>imiliya.com/2016/08/19/py-c-ext-part2/</id>
     <published>2016-08-18T17:06:53.000Z</published>
-    <updated>2016-08-19T14:41:02.000Z</updated>
+    <updated>2016-08-19T14:51:28.000Z</updated>
     
     <content type="html"><![CDATA[<p>TL; DR.</p>
 <h2 id="什么是Python-C-Extension？"><a href="#什么是Python-C-Extension？" class="headerlink" title="什么是Python C Extension？"></a>什么是Python C Extension？</h2><p>所谓<a href="https://docs.python.org/3/extending/extending.html" target="_blank" rel="external">Python C Extension</a>， 是指在Cpython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的皮，好让Python程序像import其他普通Python模块一样来使用这个C library.</p>
@@ -38,7 +38,7 @@
 </code></pre><p>在运行结果中找到header的路径(Mac)。</p>
 <pre><code>-I/usr/local/Cellar/python3/3.5.2_1/Frameworks/Python.framework/Versions/3.5/include/python3.5m
 </code></pre><p>直接cd到<code>/usr/local/Cellar/python3/3.5.2_1/Frameworks/Python.framework/Versions/3.5/include/python3.5m</code>目录就能找到这个header文件, Python源码的其他header文件也都在这里了。</p>
-<p><code>static PyObject *SpamError</code>定义了一个SpamError对象, 根据名字可以猜到这将是一个异常类。Python的所有对象对应的都是一个<code>PyObject</code>的结构， 你可以到object.h头文件里面看看PyObject是怎么定义的，不过只能看得一脸懵逼就是了，如果对Python源码好奇，墙裂推荐《Python源码分析》这本书。 .</p>
+<p><code>static PyObject *SpamError</code>定义了一个SpamError对象, 根据名字可以猜到这将是一个异常类。Python的所有对象对应的都是一个<code>PyObject</code>的结构， 你可以到object.h头文件里面看看PyObject是怎么定义的，不过只能看得一脸懵逼就是了，如果对Python源码好奇，墙裂推荐《Python源码剖析》这本书。 .</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">static PyObject *spam_system(PyObject *self, PyObject *<span class="keyword">args</span>) &#123;</div><div class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *command;</div><div class="line">  int <span class="keyword">sts</span>;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (!PyArg_ParseTuple(<span class="keyword">args</span>, <span class="string">"s"</span>, &amp;command))</div><div class="line">    <span class="keyword">return</span> NULL;</div><div class="line">   <span class="keyword">sts</span> = system(command);</div><div class="line">   <span class="keyword">if</span> (<span class="keyword">sts</span> &lt; 0) &#123;</div><div class="line">    PyErr_SetString(SpamError, <span class="string">"System command failed"</span>);</div><div class="line">    <span class="keyword">return</span> NULL;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">return</span> PyLong_FromLong(<span class="keyword">sts</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p><code>spam_system</code>定义了一个静态函数。 <code>self</code>指向的是当前模块，<code>args</code>则是Python调用这个方法时传入的参数.<br><code>PyArg_ParseTuple</code>把<code>args</code>解析成c字符串, 并让command指向这个字符串的地址， 然后调用std的system函数(通过include引入的)。 sts保存了系统调用的返回值，<code>sts &lt; 0</code> 说明调用失败，通过<code>PyErr_SetString</code> 设置异常信息，否则<code>PyLong_FromLong</code>将返回值转换为Python 的int对象.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> PyMethodDef SpamMethods[] = &#123;</div><div class="line">    &#123;<span class="string">"system"</span>, spam_system, METH_VARARGS, <span class="string">"Execute a shell command."</span>&#125;,</div><div class="line">    &#123;<span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
@@ -60,7 +60,7 @@
 <p>如果想安装到site-packages下面， 运行<code>python3 setup.py install</code>， 然后就可以在其他项目也能直接import spam模块了。</p>
 <p><em>Extension</em> 类的 <em>__init__</em> 方法还接受很多其他的参数: <em>include_dirs</em> 指定包含头文件的路径， <em>define_macros</em> 定义一些宏，<em>library_dirs</em> 指定动态链接的目录, 相当于gcc的 <em>-L</em> 选项，libraries 指定链接的库，相当与gcc的 <em>-l</em> 选项。还有其他一些参数读者请自行参考<a href="https://docs.python.org/3.5/distutils/apiref.html#distutils.core.Extension" target="_blank" rel="external">distutils</a>。</p>
 <h2 id="错误和异常-Errors-and-Exception"><a href="#错误和异常-Errors-and-Exception" class="headerlink" title="错误和异常(Errors and Exception)"></a>错误和异常(Errors and Exception)</h2><p>Python解释器有一个不成文的规定， 当函数失败的时候，需要设置一个异常信息，并且返回错误值，异常信息保存在解释器的一个静态全局变量中。如果这个变量的值为NULL，说明没有异常发生。除此之外还有两个全局变量，一个保存了异常信息对应的描述，另一个保存了发生异常时的整个调用堆栈, 它们对应了sys.exc_info()结果的三个元素。</p>
-<p>前面用到的PyErr_SetString()方法，第一个参数就是我们定义的异常类对象,第二个参数是关联的异常信息描述。 <em>PyErr_SetString(SpamError, “System command failed”)</em> 设置了全局的异常信息,Python解释器发现这个异常信息的时候，会跳转到异常处理流程(如果想了解Python解释器是怎么运作的, 异常机制又是如何实现的，再次推荐《Python源码分析》这本书)。</p>
+<p>前面用到的PyErr_SetString()方法，第一个参数就是我们定义的异常类对象,第二个参数是关联的异常信息描述。 <em>PyErr_SetString(SpamError, “System command failed”)</em> 设置了全局的异常信息,Python解释器发现这个异常信息的时候，会跳转到异常处理流程(如果想了解Python解释器是怎么运作的, 异常机制又是如何实现的，再次推荐《Python源码剖析》这本书)。</p>
 <h2 id="一点题外话——引用计数-Reference-Counts"><a href="#一点题外话——引用计数-Reference-Counts" class="headerlink" title="一点题外话——引用计数(Reference Counts)"></a>一点题外话——引用计数(Reference Counts)</h2><p>C和C++要求程序员负责动态的分配和回收堆上的内存，C语言提供了malloc()和free()函数(C++对应有new和delete操作符)。</p>
 <p>每一个malloc()分配的内存资源， 最终都需要通过调用free()来回收, 如果忘记了free， 被分配的内存资源直到进程退出都无法重新利用，这就是所谓的内存泄漏(memory leak)。如果继续使用free()过的内存， 很有可能和以后通过malloc()重新分配的内存资源冲突，会造成同引用没有初始化的指针一样的结果，core dumps, 错误的结果，进程莫名崩溃之类。</p>
 <p>常见的内存泄露都是程序忘记调用free造成的，比如错误处理的逻辑中直接return却没有free之前分配的内存，尤其是代码量比较大的时候很容易出现。如果某个有内存泄露的函数被大量的调用，那么每次调用都会造成一定的内存泄漏, 如果只是短暂运行的进程，随着进程结束，这些资源都会被操作系统回收。但是如果是长时间运行的进程（比如一个后台daemon)，没有回收的内存资源会随着程序运行时间的增加而增加，最终把系统资源耗尽，程序崩溃。 所以通过一个好的编码规范避免内存泄露就显得十分重要。</p>
