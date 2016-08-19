@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="imiliya.com/"/>
-  <updated>2016-08-19T04:44:24.000Z</updated>
+  <updated>2016-08-19T04:48:34.000Z</updated>
   <id>imiliya.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="imiliya.com/2016/08/19/py-c-ext-part2/"/>
     <id>imiliya.com/2016/08/19/py-c-ext-part2/</id>
     <published>2016-08-18T17:06:53.000Z</published>
-    <updated>2016-08-19T04:44:24.000Z</updated>
+    <updated>2016-08-19T04:48:34.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="什么是Python-C-Extension？-TL-DR"><a href="#什么是Python-C-Extension？-TL-DR" class="headerlink" title="什么是Python C Extension？ TL; DR."></a>什么是Python C Extension？ TL; DR.</h2><p>所谓<a href="https://docs.python.org/3/extending/extending.html" target="_blank" rel="external">Python C Extension</a>， 是指在Cpython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的皮，好让Python程序像import其他普通Python模块一样来使用这个C library.</p>
 <h2 id="简单实现"><a href="#简单实现" class="headerlink" title="简单实现"></a>简单实现</h2><p>我们直接看官方文档的例子来写一个extension 模块吧(偷个懒，这篇文章我就当官方文档的搬运工了)。</p>
@@ -108,6 +108,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SpamError = PyErr_NewException(<span class="string">"spam.error"</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">Py_INCREF(SpamError);</div><div class="line">PyModule_AddObject(m, <span class="string">"error"</span>, SpamError);</div></pre></td></tr></table></figure>
 <p>因为<a href="https://docs.python.org/3.5/c-api/module.html#c.PyModule_AddObject" target="_blank" rel="external">PyModule_AddObject</a>不会增加SpamError的引用计数,官方的话叫steal the reference, 如果我们不手动INC一下，那么以后删除了m.error这个属性的话，SpamError的计数就变0，对应的内存被回收，如果后面又抛出了这个异常救护出现意想不到的错误。</p>
 <p>PyArg_ParseTuple的format参数格式请参考<a href="https://docs.python.org/3/c-api/arg.html" target="_blank" rel="external">PyArg_ParseTuple</a>, 与之对应的还有<code>Py_BuildValue</code> 函数， 用来构造Python对象.</p>
+<p><a href="https://github.com/moonshadow/way-to-python-ninja/tree/master/python-c-ext/impl-python-c-ext" target="_blank" rel="external">相关代码</a></p>
 <p>Anyway, 手动实现一个Python C Extension始终是一件很麻烦的事(还要了解Python的引用计数是怎么玩的)。如果只是简单系统调用，用<code>ctypes</code>就能直接搞定， 那专心写好C代码，然后直接让Python像用普通模块一样把它用起来岂不是更加方便？ 下一篇我们就来看看一个叫做CFFI的第三方库又是怎么实现在Python中调用C语言库的吧。</p>
 ]]></content>
     
