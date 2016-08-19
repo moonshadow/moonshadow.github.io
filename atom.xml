@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="imiliya.com/"/>
-  <updated>2016-08-19T15:12:30.000Z</updated>
+  <updated>2016-08-19T16:11:40.000Z</updated>
   <id>imiliya.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="imiliya.com/2016/08/19/py-c-ext-part2/"/>
     <id>imiliya.com/2016/08/19/py-c-ext-part2/</id>
     <published>2016-08-18T17:06:53.000Z</published>
-    <updated>2016-08-19T15:12:30.000Z</updated>
+    <updated>2016-08-19T16:11:40.000Z</updated>
     
     <content type="html"><![CDATA[<p>TL; DR.</p>
 <h2 id="什么是Python-C-Extension？"><a href="#什么是Python-C-Extension？" class="headerlink" title="什么是Python C Extension？"></a>什么是Python C Extension？</h2><p>所谓<a href="https://docs.python.org/3/extending/extending.html" target="_blank" rel="external">Python C Extension</a>， 是指在CPython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的皮，好让Python程序像import其他普通Python模块一样来使用这个C library.</p>
@@ -99,7 +99,7 @@
 <p>Py_BEGIN_ALLOW_THREADS和Py_END_ALLOW_THREADS之间，GIL被释放了，于是item就有可能在另一个线程被回收掉，后面在执行 PyObject_Print就可能产生意想不到的bug!</p>
 <p>用borrow还是own其实并没有明确的规定，取决于那个模型在特定场景下使用更加方便，我们可以通过官方文档知道某个Python C API的函数具体用的borrow还是own。</p>
 <p>讲了这么多引用计数的东西好像已经偏题了, 看得出来在C Extension里面对引用计数的处理也是一件比较tricky的事情。如果你对这块很感兴趣，直接阅读<a href="https://docs.python.org/3/extending/extending.html" target="_blank" rel="external">官方文档</a>是一个不错的选择, 这篇文章<a href="http://edcjones.tripod.com/refcount.html" target="_blank" rel="external">http://edcjones.tripod.com/refcount.html</a>则做了一定的解释和补充。 please keep reading patiently!</p>
-<p>如果你对 <em>borrow</em>，<em>own</em> 这一块很感兴趣 ,隔壁有一门叫做<a href="https://doc.rust-lang.org" target="_blank" rel="external">Rust</a>的语言值得尝试, 可以看看它的 <em>ownership system</em> 是怎么玩的。</p>
+<p>如果你对 <em>borrow</em>，<em>own</em> 这一块很感兴趣 ,隔壁有一门叫做<a href="https://doc.rust-lang.org/book/ownership.html" target="_blank" rel="external">Rust</a>的语言值得尝试, 可以看看它的 <em>ownership system</em> 是怎么玩的。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>简单的讲, 实现一个C Extension模块要做好三件事情</p>
 <ol>
 <li>满足C Extension接口的规范</li>
