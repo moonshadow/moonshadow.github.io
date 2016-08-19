@@ -319,9 +319,17 @@
 
       
         
-          
-            
-          
+          <h2 id="什么是Python-C-Extension？-TL-DR"><a href="#什么是Python-C-Extension？-TL-DR" class="headerlink" title="什么是Python C Extension？ TL; DR."></a>什么是Python C Extension？ TL; DR.</h2><p>所谓<a href="https://docs.python.org/3/extending/extending.html">Python C Extension</a>， 是指在Cpython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的皮，好让Python程序像import其他普通Python模块一样来使用这个C library.</p>
+<h2 id="简单实现"><a href="#简单实现" class="headerlink" title="简单实现"></a>简单实现</h2><p>我们直接看官方文档的例子来写一个extension 模块吧(偷个懒，这篇文章我就当官方文档的搬运工了)。</p>
+<p>创建<code>main.py</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> spam</div><div class="line"></div><div class="line">status = spam.system(<span class="string">'ls -l'</span>)</div></pre></td></tr></table></figure>
+<p>spam是我们将要实现的Extension模块, 使用方式很简单，直接import就行了。</p>
+<p>然后我们来实现这个模块。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/19/py-c-ext-part2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -438,8 +446,7 @@
 
       
         
-          
-            <h2 id="写博客的动机"><a href="#写博客的动机" class="headerlink" title="写博客的动机"></a>写博客的动机</h2><p>当了这么久的程序员，中间有好几次也想过开个博客写点什么。可是一来觉得自己太菜，再又实在过于怠惰，计划就搁置一旁(买了个域名躺了一年😂)。 然而一直以来看了各路大侠的博客，偷偷学到不少东西, 感觉好像也没那么菜了，也觉着应该把自己的一些想法和见解分享出去，回馈社会, 而不是在自己的脑子里面憋着， 即使被打脸也算是又学到了嘛, 何乐而不为。</p>
+          <h2 id="写博客的动机"><a href="#写博客的动机" class="headerlink" title="写博客的动机"></a>写博客的动机</h2><p>当了这么久的程序员，中间有好几次也想过开个博客写点什么。可是一来觉得自己太菜，再又实在过于怠惰，计划就搁置一旁(买了个域名躺了一年😂)。 然而一直以来看了各路大侠的博客，偷偷学到不少东西, 感觉好像也没那么菜了，也觉着应该把自己的一些想法和见解分享出去，回馈社会, 而不是在自己的脑子里面憋着， 即使被打脸也算是又学到了嘛, 何乐而不为。</p>
 <p>在下一介Python程序员, 而且是<em>真のPython粉</em>，那就从Python写起吧, 也比较得心应手一点。现今市面上充斥各种Python教程(Python也真是太简单易上手了), 我就不去凑这个热闹也讲些Python基础或者<em>tips</em>什么的了。将要讲到的内容都是面向至少中级的Python程序员的. 所以读者最好是具备一定的Python水平，如果是刚入门的小朋友, 至少先买两本入门教程撸一遍再来吧，请点击右上角不送。</p>
 <p>暂定的系列有</p>
 <ol>
@@ -452,43 +459,11 @@
 <li>Modules</li>
 <li>Logging</li>
 </ol>
-<h2 id="First-of-first-Python-C-Extension"><a href="#First-of-first-Python-C-Extension" class="headerlink" title="First of first (Python C Extension)"></a>First of first (Python C Extension)</h2><p>不知道大家觉得Python最神秘的地方在哪里。反正在我的经验看来，最搞不清扯不明的地方就是所谓的Python C Extension Module了。ctypes， cffi， swig， cython, numba这些名词，听上去就觉得好可怕, 想搜个像样子的介绍文章出来都难, 直接看官方文档吧有感觉有点overwhelming. 所以我希望通过C Extension这个系列的文章，把这些玩意儿一个一个都探索一下。 本人C语言水平有限，如果有胡说八道的地方， 欢迎指正，大家一起学习进步😀。 以后所有文章只针对Python3，关于<em>Python2 or Python3</em>, 以后也会找机会讨论一下, 如果有必要联系Python2的相关知识我会专门指出, 文中所有涉及到编译c代码的地方都假设读者使用的是类unix的操作系统(原因是我对windows的生态系统实在一无所知)。</p>
-<h2 id="why-C"><a href="#why-C" class="headerlink" title="why C?"></a>why C?</h2><p>好吧，我们用Python是因为它很高的抽象层次，可以帮助我们迅速的构建应用，不论是写一个简单的任务脚本还是搭一个小型网站，Python都是上佳选择。然而世上没有免费午餐，开发效率的代价是牺牲了软件性能，不过一般情况下这都不是事，比如Python构建的web app性能瓶颈大多都在IO，这是没法在代码层面优化的, 可以通过改变IO模型或者扩容服务器来解决。而且一般的Python程序员习惯了Python的简介优雅，可能对性能什么的没什么概念。不过夜路走多了总会撞鬼，平常没有意识，真正性能出现问题需要优化的时候只能是一脸懵逼。如果能够具备一定的性能意识，在需要的时候知道有哪些办法可以选择和尝试，那么至少是走在了正确的道路上。性能Profile也是一个大的话题，以后再展开。</p>
-<p>学习C Extension Programming也能加深对Python语言本身的理解， 对于写出更高质量的Python代码也是很有帮助的。 所以废话不多说，进入第一个话题，如何在Python代码里面调用C函数.</p>
-<h2 id="How-to-call-C-function-in-Python-code"><a href="#How-to-call-C-function-in-Python-code" class="headerlink" title="How to call C function in Python code?"></a>How to call C function in Python code?</h2><p>python标准库提供了<a href="https://docs.python.org/3.5/library/ctypes.html#module-ctypes" target="_blank" rel="external"><strong>ctypes</strong></a>模块, 可以帮助我们把DLL或者shared libraries(共享库)中的函数封装成可以直接调用的Python函数。如果发现需要的某个工具已经有C语言的library, 我们就不需要重新用Python实现相同功能的模块， 既保证了效率还能省去性能的烦恼。下面是一个简单的例子:</p>
-<p>首先我们创建一个C文件<code>utils.c</code>, 定义factorial和swap两个函数.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">factorial</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">  <span class="keyword">if</span> (x &lt;= <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> factorial(x<span class="number">-1</span>) * x;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> *b)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> temp = *a;</div><div class="line">  *a = *b;</div><div class="line">  *b = temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然后编译成目标文件<code>utils.o</code>(我用的是Mac下面的LLVM编译器）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gcc -c -Wall -Werror utils.c</div></pre></td></tr></table></figure>
-<p>再把刚生成的目标文件转化成动态链接库.</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">gcc</span> <span class="selector-tag">-shared</span> <span class="selector-tag">-o</span> <span class="selector-tag">libutils</span><span class="selector-class">.so</span> <span class="selector-tag">utils</span><span class="selector-class">.o</span></div></pre></td></tr></table></figure>
-<p>我们需要做的就是在<em>Python</em>代码中调用刚才在<code>utils.c</code>中定义的两个函数. 下面示例如何用<em>ctypes</em>来操作，创建文件<code>main.py</code>:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> ctypes</div><div class="line"></div><div class="line"></div><div class="line">utils = ctypes.cdll.LoadLibrary(<span class="string">'./libutils.so'</span>)</div><div class="line"></div><div class="line">factorial = utils.factorial</div><div class="line">factorial.argtypes = (ctypes.c_int,)</div><div class="line">factorial.restype = ctypes.c_int</div><div class="line"></div><div class="line">_swap  = utils.swap</div><div class="line">_swap.argtypes = (ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int))</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">swap</span><span class="params">(x, y)</span>:</span></div><div class="line">    a = ctypes.c_int(x)</div><div class="line">    b = ctypes.c_int(y)</div><div class="line">    _swap(a, b)</div><div class="line">    <span class="keyword">return</span> a.value, b.value</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    print(<span class="string">'factorial of 4 is %s !'</span> % factorial(<span class="number">4</span>))</div><div class="line">    print(<span class="string">'factorial of 5 is %s !'</span> % factorial(<span class="number">5</span>))</div><div class="line"></div><div class="line">    x, y = <span class="number">10</span>, <span class="number">20</span></div><div class="line">    print(<span class="string">'x is %s and y is %s'</span> % (x, y))</div><div class="line">    x, y = swap(x, y)</div><div class="line">    print(<span class="string">'after swap'</span>)</div><div class="line">    print(<span class="string">'x is %s and y is %s'</span> % (x, y))</div></pre></td></tr></table></figure>
-<p><code>utils = ctypes.cdll.LoadLibrary(&#39;./libutils.so&#39;)</code> 载入了已经编译好的<code>libutils.so</code>, factorial和swap两个函数变成了模块的locals.（如果不是自己编译的模块而是想用系统的C语言共享库，参考<code>cypes.utils</code>的<code>find_library</code>方法，路径通常都是<code>/usr/lib</code> 和 <code>/usr/local/lib</code>， linux操作系统默认都是<em>libxxx.so</em>的格式， 而os x则是<em>libxxx.dylib</em>)</p>
-<p>对于<code>factorial</code>函数，只需要把python的int对象转换成对应的ctype类型再传入factorial函数， 同时需要定义返回的结果类型，把factorial函数返回的int转换成Python的int对象</p>
-<p><code>swap</code>函数稍微麻烦一点，因为Python不能直接访问指针，所以需要把已有的c函数稍微做个封装， 不过思路一样就是了.</p>
-<p>最后验证一下结果。<br>运行</p>
-<pre><code>python3 main.py
-</code></pre><p>终端输出</p>
-<pre><code>factorial of 4 is 24 !
-factorial of 5 is 120 !
-x is 10 and y is 20
-after swap
-x is 20 and y is 10
-</code></pre><p>Perfect! 简单的几个步骤，我们就实现了在Python中调用c函数.</p>
-<p>顺便我们对比一下C语言实现的factorial和Python版本的性能,</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> ctypes</div><div class="line"><span class="keyword">from</span> timeit <span class="keyword">import</span> timeit</div><div class="line"></div><div class="line"></div><div class="line">utils = ctypes.cdll.LoadLibrary(<span class="string">'./libutils.so'</span>)</div><div class="line"></div><div class="line">factorial = utils.factorial</div><div class="line">factorial.argtypes = (ctypes.c_int,)</div><div class="line">factorial.restype = ctypes.c_int</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">py_factorial</span><span class="params">(n)</span>:</span></div><div class="line">    <span class="keyword">assert</span> isinstance(n, int)</div><div class="line">    <span class="keyword">if</span> n &lt;= <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span></div><div class="line">    <span class="keyword">return</span> py_factorial(n<span class="number">-1</span>) * n</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    number = <span class="number">100000</span></div><div class="line">    print(<span class="string">'Python 版本100000次的factorial(10)时间'</span>)</div><div class="line">    print(timeit(<span class="string">'py_factorial(10)'</span>, number=number, globals=globals()))</div><div class="line">    print(<span class="string">'C 版本100000次的factorial(10)时间'</span>)</div><div class="line">    print(timeit(<span class="string">'factorial(10)'</span>, number=number, globals=globals()))</div></pre></td></tr></table></figure>
-<p>保存到<code>benchmark.py</code></p>
-<p>在我的机器上运行的结果是</p>
-<pre><code>Python 版本100000次的factorial(10)时间
-0.3275668309943285
-C 版本100000次的factorial(10)时间
-0.07990392099600285
-</code></pre><p>大概4倍的样子, very nice!</p>
-<p>第一个例子就到这里了，ctypes打开了Python调用c代码库的大门。 然而很多时候并没有现成的c库给我们调， 那么就需要自己写Python的C Extension了，下一篇我们先研究一下如何裸写一个Python的C extension模块吧.</p>
-<p>上面示例的代码已经放到<a href="https://github.com/moonshadow/way-to-python-ninja" target="_blank" rel="external"><strong>github</strong></a>上面了，可以拉下来参照<a href="https://docs.python.org/3.5/library/ctypes.html#module-ctypes" target="_blank" rel="external"><strong>ctypes</strong></a>的文档自己玩玩, 如果你有更好的sample或者建议欢迎一起交流.</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/16/py-ext/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
