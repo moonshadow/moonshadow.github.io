@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="imiliya.com/"/>
-  <updated>2016-08-19T04:49:51.000Z</updated>
+  <updated>2016-08-19T14:41:02.000Z</updated>
   <id>imiliya.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="imiliya.com/2016/08/19/py-c-ext-part2/"/>
     <id>imiliya.com/2016/08/19/py-c-ext-part2/</id>
     <published>2016-08-18T17:06:53.000Z</published>
-    <updated>2016-08-19T04:49:51.000Z</updated>
+    <updated>2016-08-19T14:41:02.000Z</updated>
     
     <content type="html"><![CDATA[<p>TL; DR.</p>
 <h2 id="什么是Python-C-Extension？"><a href="#什么是Python-C-Extension？" class="headerlink" title="什么是Python C Extension？"></a>什么是Python C Extension？</h2><p>所谓<a href="https://docs.python.org/3/extending/extending.html" target="_blank" rel="external">Python C Extension</a>， 是指在Cpython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的皮，好让Python程序像import其他普通Python模块一样来使用这个C library.</p>
@@ -96,7 +96,7 @@
 <p>所以你发现borrow和own的区别了么? borrow过来reference的不会占用一个计数，在使用borrow的引用过程中必须要自己保证引用有效，如果可以保证中间没有操作可能减少这个引用计数的话，我们甚至省去了INC和DEC引用的烦恼，所谓borrow就是我借过来用一下，等下肯定会还你的。这个比喻其实有一点不恰当的地方，因为borrow的reference其实也被借出方占着的，比如上面的list也还是可以访问item对象，借的过程中借用方甚至还要担心被借走的东西被已经被处理掉的可能（PyList_SetItem）， 这其实就不叫借了吧，还不如说是暂时share给你一会儿，虽然你也能用，但是别人问起来你得说这个东西你并没有所有权, 而且share给你的人心情不好把东西给卖了你就用不了了，这个时候Py_INCREF就好像在说你先别卖啊，我还没用完呢，Py_DECREF则是说我现在已经不用了，你爱怎么玩怎么玩。own就不一样了，如果我们两个都own了一个东西，那么光你说卖还不成，你只能说自己不要了（像del list0)那样，但是我还占着一份呢，Py_DECREF则是说现在我也不想要了——喂，那个捡垃圾的(item的 <code>__del__</code> 方法)，你来拿走吧。 不知道这样表述清不清楚。</p>
 <p>对于上面的例子，Python的GIL保证了这个函数调用过程不会被其他线程打断,因此我们不必担心被borrow的引用item在另一个线程被回收了（比如在另一个thread调用了PyList_SetItem，里面又做了减少item引用计数的事情（论GIL的重要性). 但是python提供了Py_BEGIN_ALLOW_THREADS这个宏来暂时解除全局锁，看看下面的这个代码</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span></span></div><div class="line"><span class="title">bug</span><span class="params">(PyObject *<span class="built_in">list</span>)</span></div><div class="line">&#123;</div><div class="line">    PyObject *item = PyList_GetItem(<span class="built_in">list</span>, <span class="number">0</span>);</div><div class="line">    Py_BEGIN_ALLOW_THREADS</div><div class="line">    ...some blocking I/O call...</div><div class="line">    <span class="function">Py_END_ALLOW_THREADS</span></div><div class="line">    <span class="title">PyObject_Print</span><span class="params">(item, <span class="built_in">stdout</span>, <span class="number">0</span>)</span>; <span class="comment">/* BUG! */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Py_BEGIN_ALLOW_THREADS和Py_END_ALLOW_THREADS之间，GIL被释放了，于是item就有可能在另一个线程被回收掉，后面在执行 PyObject_Print的话——core dump!</p>
+<p>Py_BEGIN_ALLOW_THREADS和Py_END_ALLOW_THREADS之间，GIL被释放了，于是item就有可能在另一个线程被回收掉，后面在执行 PyObject_Print就可能产生意想不到的bug!</p>
 <p>讲了这么多引用计数的东西好像已经偏题了, 看得出来在C Extension里面对引用计数的处理也是一件比较tricky的事情。如果你对这块很感兴趣，直接阅读<a href="https://docs.python.org/3/extending/extending.html" target="_blank" rel="external">官方文档</a>是一个不错的选择, 这篇文章<a href="http://edcjones.tripod.com/refcount.html" target="_blank" rel="external">http://edcjones.tripod.com/refcount.html</a>则做了一定的解释和补充。 please keep reading patiently!</p>
 <p>如果你对 <em>borrow</em>，<em>own</em> 这一块很感兴趣 ,隔壁有一门叫做<a href="https://doc.rust-lang.org" target="_blank" rel="external">Rust</a>的语言值得尝试, 可以看看它的 <em>ownership system</em> 是怎么玩的。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>简单的讲, 实现一个C Extension模块要做好三件事情</p>
