@@ -86,19 +86,16 @@
 
 
 
-<meta name="description" content="背景用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type application/json传递的数据。先来来看一个样例:
-12345678910111213">
+<meta name="description" content="背景用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type application/json传递的数据。先来来看一个样例:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="实现一个简单优雅的Flask表单验证模块">
 <meta property="og:url" content="imiliya.com/2016/08/23/flask-form/index.html">
 <meta property="og:site_name" content="Wang Haowei - Python Programmer">
-<meta property="og:description" content="背景用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type application/json传递的数据。先来来看一个样例:
-12345678910111213">
-<meta property="og:updated_time" content="2016-08-22T21:07:08.000Z">
+<meta property="og:description" content="背景用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type application/json传递的数据。先来来看一个样例:">
+<meta property="og:updated_time" content="2016-08-22T21:13:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实现一个简单优雅的Flask表单验证模块">
-<meta name="twitter:description" content="背景用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type application/json传递的数据。先来来看一个样例:
-12345678910111213">
+<meta name="twitter:description" content="背景用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type application/json传递的数据。先来来看一个样例:">
 
 
 
@@ -263,7 +260,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-22T22:40:43+06:00" content="2016-08-22">
+            <time itemprop="dateCreated" datetime="2016-08-23T00:40:43+08:00" content="2016-08-22">
               2016-08-22
             </time>
           </span>
@@ -318,6 +315,7 @@
 
       
         <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type <code>application/json</code>传递的数据。先来来看一个样例:</p>
+<a id="more"></a>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request</div><div class="line"><span class="meta">@app.route('/register', methods=['POST'])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">register</span><span class="params">()</span>:</span></div><div class="line">    username = request.form.get(<span class="string">'username'</span>)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> username:</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">'username cannot be empty'</span>)</div><div class="line">    <span class="keyword">if</span> len(username) &gt; <span class="number">10</span>:</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">'username should be less than 10'</span>)</div><div class="line">    password = request.form.get(<span class="string">'password'</span>)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> password:</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">'password cannot be empty'</span>)</div><div class="line">    <span class="keyword">if</span> len(password) &lt; <span class="number">10</span>:</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">'username should be longer than 10'</span>)</div><div class="line">    age = request.form.get(<span class="string">'age'</span>)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> age:</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">'age should not be empty'</span>)</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">      age = int(age)</div><div class="line">    <span class="keyword">except</span> (TypeError, ValueError):</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">'age should be an integer'</span>)</div><div class="line">    from_ = request.args.get(<span class="string">'from'</span>)</div><div class="line">    <span class="keyword">if</span> from_ <span class="keyword">not</span> <span class="keyword">in</span> (<span class="string">'qq'</span>, <span class="string">'weibo'</span>, <span class="string">'native'</span>):</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">'invalid from'</span>)</div><div class="line">    <span class="keyword">if</span> from_ == <span class="string">'weibo'</span></div><div class="line">      register_weibo(username, password, age)</div><div class="line">    <span class="keyword">if</span> from_ == <span class="string">'qq'</span>:</div><div class="line">      register_qq(username, password, age)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">      register_native(username, passowrd, age)</div></pre></td></tr></table></figure>
 <p>我们花费了大量的精力在获取和验证username, age, password和from_这几个字段， register的view层看上去就感觉很混乱，要改动某个字段的验证逻辑，还要在register函数 中找到对应这个字段的验证代码。有没有办法把表单验证的逻辑从视图层抽离出去，让视图层只做dispatch的活呢？</p>
 <p>有django开发经验的同学会想那就来写个middleware吧，Flask其实也提供了middleware机制， 不过这个middleware是底层werkzeug库封装的wsgi中间件，不能很好地和flask框架的上下文结合起来。 其实我们完全可以从Python语言层面触发，利用Python强大的抽象能力，用最简单的方式解决问题。对， 你是不是也想到了，Python的万金油大杀器——decorator!</p>
