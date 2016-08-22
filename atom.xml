@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="imiliya.com/"/>
-  <updated>2016-08-22T21:13:08.000Z</updated>
+  <updated>2016-08-22T21:21:06.000Z</updated>
   <id>imiliya.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="imiliya.com/2016/08/23/flask-form/"/>
     <id>imiliya.com/2016/08/23/flask-form/</id>
     <published>2016-08-22T16:40:43.000Z</published>
-    <updated>2016-08-22T21:13:08.000Z</updated>
+    <updated>2016-08-22T21:21:06.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type <code>application/json</code>传递的数据。先来来看一个样例:</p>
 <a id="more"></a>
@@ -59,7 +59,7 @@ Out[1]:
 <p>注意我们并没有把字段的name作为参数传入， 那么FormField又怎么知道字段的名字是什么呢? 又到了使用黑膜法的时候，虽然我一再承诺不率先使用metaclass。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FormFieldMeta</span><span class="params">(type)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls, name, bases, attrs)</span>:</span></div><div class="line">        <span class="keyword">for</span> field, value <span class="keyword">in</span> attrs.items():</div><div class="line">            <span class="keyword">if</span> isinstance(value, FormField):</div><div class="line">                value.name = field</div><div class="line">        <span class="keyword">return</span> type.__new__(cls, name, bases, attrs)</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Form</span><span class="params">(metaclass=FormFieldMeta)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, view_func)</span>:</span></div><div class="line">        self._view_func = view_func</div><div class="line">        functools.update_wrapper(self, view_func)</div></pre></td></tr></table></figure></p>
 <p><code>FormFieldMeta</code>在<code>Form</code>类创建的时候，遍历了<code>Form</code>的属性，如果发现<code>FormField</code>就把对应的属性名设为<code>FormField</code>的name字段，所以千万别以为metaclass有多高深，其实是很简单的玩儿。（当然我假设你有了解过metaclass的原理）。</p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Congrats! We’are done! 我们实现了一个声明式的基于decorator的flask表单验证模块。你可以试试现在再跑一下之前的测试用例。相关代码请参考<a href="https://github.com/moonshadow/way-to-python-ninja/tree/master/advanced-flask/form" target="_blank" rel="external">flask form</a>。 如果测试通过，接下来就可以走TDD的第三步——refactor了, enjoy yourself!。</p>
-<p>回顾一下，为了实现这个模块，我们用到了decorator，descriptor， metaclass，keyword only argument, 多重继承，mro, flask的context global… 庆祝一下我们的成果吧！如果你对整个模块的实现都已经很清楚的理解了，恭喜你，You’are an Python veteran now. 如果你还有很多困惑，也不要着急，把每个点的功课一个一个做好，多动脑筋思考，相信最后肯定也能理解的。</p>
+<p>回顾一下，为了实现这个模块，我们用到了decorator，descriptor， metaclass，keyword only argument, 多重继承，mro, flask的context global… 庆祝一下我们的成果吧！如果你对整个模块的实现都已经了然于胸，恭喜你，You’are an Python veteran now! 如果你还有很多困惑或者感觉举步维艰，也不要着急，把每个点的功课一个一个做好，多动脑筋思考, 试着以理解这个模块为目标好好地学一波Python吧, Tt deserves! I promise。</p>
 <p>Anyway, 如果你有更好的设计或者更加优雅的实现，不妨也拿出来分享一下。</p>
 ]]></content>
     
