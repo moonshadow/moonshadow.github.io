@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Flask,Python," />
 
 
 
@@ -86,15 +86,19 @@
 
 
 
-<meta name="description" content="Write about Python, Linux, ACG and other interesting stuffs.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wang Haowei - Python Programmer">
-<meta property="og:url" content="imiliya.com/index.html">
+<meta name="description" content="背景用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type application/json传递的数据。先来来看一个样例:
+12345678910111213">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现一个简单优雅的Flask表单验证模块">
+<meta property="og:url" content="imiliya.com/2016/08/23/flask-form/index.html">
 <meta property="og:site_name" content="Wang Haowei - Python Programmer">
-<meta property="og:description" content="Write about Python, Linux, ACG and other interesting stuffs.">
+<meta property="og:description" content="背景用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type application/json传递的数据。先来来看一个样例:
+12345678910111213">
+<meta property="og:updated_time" content="2016-08-22T21:07:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wang Haowei - Python Programmer">
-<meta name="twitter:description" content="Write about Python, Linux, ACG and other interesting stuffs.">
+<meta name="twitter:title" content="实现一个简单优雅的Flask表单验证模块">
+<meta name="twitter:description" content="背景用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type application/json传递的数据。先来来看一个样例:
+12345678910111213">
 
 
 
@@ -115,9 +119,9 @@
 
 
 
-  <link rel="canonical" href="imiliya.com/"/>
+  <link rel="canonical" href="imiliya.com/2016/08/23/flask-form/"/>
 
-  <title> Wang Haowei - Python Programmer </title>
+  <title> 实现一个简单优雅的Flask表单验证模块 | Wang Haowei - Python Programmer </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -138,9 +142,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -227,9 +229,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -249,10 +251,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/08/23/flask-form/" itemprop="url">
-                  实现一个简单优雅的Flask表单验证模块
-                </a>
+                实现一个简单优雅的Flask表单验证模块
               
             
           </h1>
@@ -318,9 +317,7 @@
       
 
       
-        
-          
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type <code>application/json</code>传递的数据。先来来看一个样例:</p>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>用Flask框架开发web应用的过程中，我们通常会在视图层写很多繁琐的代码来校验表单的数据，同时把提交的数据转换成业务需要的格式, 结果就是视图层的代码到处夹杂着表单验证的逻辑，显得错综复杂，难以维护。注意我所指的表单是更加广义的概念，包括query string或者通过Content-Type <code>application/json</code>传递的数据。先来来看一个样例:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request</div><div class="line"><span class="meta">@app.route('/register', methods=['POST'])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">register</span><span class="params">()</span>:</span></div><div class="line">    username = request.form.get(<span class="string">'username'</span>)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> username:</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">'username cannot be empty'</span>)</div><div class="line">    <span class="keyword">if</span> len(username) &gt; <span class="number">10</span>:</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">'username should be less than 10'</span>)</div><div class="line">    password = request.form.get(<span class="string">'password'</span>)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> password:</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">'password cannot be empty'</span>)</div><div class="line">    <span class="keyword">if</span> len(password) &lt; <span class="number">10</span>:</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">'username should be longer than 10'</span>)</div><div class="line">    age = request.form.get(<span class="string">'age'</span>)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> age:</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">'age should not be empty'</span>)</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">      age = int(age)</div><div class="line">    <span class="keyword">except</span> (TypeError, ValueError):</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">'age should be an integer'</span>)</div><div class="line">    from_ = request.args.get(<span class="string">'from'</span>)</div><div class="line">    <span class="keyword">if</span> from_ <span class="keyword">not</span> <span class="keyword">in</span> (<span class="string">'qq'</span>, <span class="string">'weibo'</span>, <span class="string">'native'</span>):</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">'invalid from'</span>)</div><div class="line">    <span class="keyword">if</span> from_ == <span class="string">'weibo'</span></div><div class="line">      register_weibo(username, password, age)</div><div class="line">    <span class="keyword">if</span> from_ == <span class="string">'qq'</span>:</div><div class="line">      register_qq(username, password, age)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">      register_native(username, passowrd, age)</div></pre></td></tr></table></figure>
 <p>我们花费了大量的精力在获取和验证username, age, password和from_这几个字段， register的view层看上去就感觉很混乱，要改动某个字段的验证逻辑，还要在register函数 中找到对应这个字段的验证代码。有没有办法把表单验证的逻辑从视图层抽离出去，让视图层只做dispatch的活呢？</p>
 <p>有django开发经验的同学会想那就来写个middleware吧，Flask其实也提供了middleware机制， 不过这个middleware是底层werkzeug库封装的wsgi中间件，不能很好地和flask框架的上下文结合起来。 其实我们完全可以从Python语言层面触发，利用Python强大的抽象能力，用最简单的方式解决问题。对， 你是不是也想到了，Python的万金油大杀器——decorator!</p>
@@ -359,298 +356,61 @@ Out[1]:
 <p>回顾一下，为了实现这个模块，我们用到了decorator，descriptor， metaclass，keyword only argument, 多重继承，mro, flask的context global… 庆祝一下我们的成果吧！如果你对整个模块的实现都已经很清楚的理解了，恭喜你，You’are an Python veteran now. 如果你还有很多困惑，也不要着急，把每个点的功课一个一个做好，多动脑筋思考，相信最后肯定也能理解的。</p>
 <p>Anyway, 如果你有更好的设计或者更加优雅的实现，不妨也拿出来分享一下。</p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/19/py-c-ext-part2/" itemprop="url">
-                  An Introduction to Python C Extension Programming (Part2)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-18T23:06:53+06:00" content="2016-08-18">
-              2016-08-18
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/Flask/" rel="tag">#Flask</a>
           
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/19/py-c-ext-part2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/19/py-c-ext-part2/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/Python/" rel="tag">#Python</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>TL; DR.</p>
-<h2 id="什么是Python-C-Extension？"><a href="#什么是Python-C-Extension？" class="headerlink" title="什么是Python C Extension？"></a>什么是Python C Extension？</h2><p>所谓<a href="https://docs.python.org/3/extending/extending.html">Python C Extension</a>， 是指在CPython平台上面,遵循Python C Extension Interface写出来的c代码模块，经过编译后可以在Python代码中直接import，相当于一个Python Module。 通俗的讲，就是用C语言实现一个library，然后给这个library披一个Python模块的皮，好让Python程序像import其他普通Python模块一样来使用这个C library.</p>
-<h2 id="简单实现"><a href="#简单实现" class="headerlink" title="简单实现"></a>简单实现</h2><p>我们直接看官方文档的例子来写一个extension 模块吧(偷个懒，这篇文章我就当官方文档的搬运工了)。</p>
-<p>创建<code>main.py</code>:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> spam</div><div class="line"></div><div class="line">status = spam.system(<span class="string">'ls -l'</span>)</div></pre></td></tr></table></figure>
-<p>spam是我们将要实现的Extension模块, 使用方式很简单，直接import就行了。</p>
-<p>然后我们来实现这个模块。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/19/py-c-ext-part2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/19/py-c-ext-part2/" rel="next" title="An Introduction to Python C Extension Programming (Part2)">
+                <i class="fa fa-chevron-left"></i> An Introduction to Python C Extension Programming (Part2)
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/16/py-c-ext-part1/" itemprop="url">
-                  An Introduction to Python C Extension Programming (Part1)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-16T06:45:36+06:00" content="2016-08-16">
-              2016-08-16
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/16/py-c-ext-part1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/16/py-c-ext-part1/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h2 id="写博客的动机"><a href="#写博客的动机" class="headerlink" title="写博客的动机"></a>写博客的动机</h2><p>当了这么久的程序员，中间有好几次也想过开个博客写点什么。可是一来觉得自己太菜，再又实在过于怠惰，计划就搁置一旁(买了个域名躺了一年😂)。 然而一直以来看了各路大侠的博客，偷偷学到不少东西, 感觉好像也没那么菜了，也觉着应该把自己的一些想法和见解分享出去，回馈社会, 而不是在自己的脑子里面憋着， 即使被打脸也算是又学到了嘛, 何乐而不为。</p>
-<p>在下一介Python程序员, 而且是<em>真のPython粉</em>，那就从Python写起吧, 也比较得心应手一点。现今市面上充斥各种Python教程(Python也真是太简单易上手了), 我就不去凑这个热闹也讲些Python基础或者<em>tips</em>什么的了。将要讲到的内容都是面向至少中级的Python程序员的. 所以读者最好是具备一定的Python水平，如果是刚入门的小朋友, 至少先买两本入门教程撸一遍再来吧，请点击右上角不送。</p>
-<p>暂定的系列有</p>
-<ol>
-<li>Python C Extension</li>
-<li>Profile</li>
-<li>Debugging</li>
-<li>Python2 or Python3</li>
-<li>Unicode</li>
-<li>AsyncIO</li>
-<li>Modules</li>
-<li>Logging</li>
-</ol>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/16/py-c-ext-part1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -658,6 +418,17 @@ Out[1]:
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -677,8 +448,17 @@ Out[1]:
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -755,6 +535,17 @@ Out[1]:
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-first"><span class="nav-number">2.</span> <span class="nav-text">Test first</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -858,6 +649,10 @@ Out[1]:
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
@@ -874,9 +669,9 @@ Out[1]:
 
     <script type="text/javascript">
       var disqus_shortname = 'imiliya';
-      var disqus_identifier = 'index.html';
-      var disqus_title = "";
-      var disqus_url = 'http://';
+      var disqus_identifier = '2016/08/23/flask-form/';
+      var disqus_title = "实现一个简单优雅的Flask表单验证模块";
+      var disqus_url = 'http://imiliya.com/2016/08/23/flask-form/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
@@ -887,6 +682,8 @@ Out[1]:
       }
 
       run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
       
     </script>
   
