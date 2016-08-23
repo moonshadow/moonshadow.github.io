@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://imiliya.com/2016/08/23/flask-form/</loc>
+    <lastmod>2016-08-22T21:21:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>实现一个简单优雅的Flask表单验证模块</title>
+        <pubTime>2016-08-22T16:40:43.000Z</pubTime>
+        
+        <tag>Flask</tag>
+         
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming" url="http://imiliya.com/categories/Programming/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://imiliya.com/2016/08/19/py-c-ext-part2/</loc>
+    <lastmod>2016-08-19T16:11:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>An Introduction to Python C Extension Programming (Part2)</title>
+        <pubTime>2016-08-18T17:06:53.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>C</tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming" url="http://imiliya.com/categories/Programming/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://imiliya.com/2016/08/16/py-c-ext-part1/</loc>
+    <lastmod>2016-08-18T18:05:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>An Introduction to Python C Extension Programming (Part1)</title>
+        <pubTime>2016-08-16T00:45:36.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>C</tag>
+         
+         
+           
+             
+              <breadCrumb title="Programming" url="http://imiliya.com/categories/Programming/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+</urlset>
