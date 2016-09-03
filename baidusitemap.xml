@@ -4,16 +4,31 @@
 
     
   <url>
+    <loc>http://imiliya.com/2016/09/03/Beauty-of-Morden-JavaScript/</loc>
+    <lastmod>2016-09-03T06:57:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>Beauty of Morden JavaScript</title>
+        <pubTime>2016-09-02T21:15:31.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://imiliya.com/2016/08/23/flask-form/</loc>
-    <lastmod>2016-08-23T02:03:10.000Z</lastmod>
+    <lastmod>2016-09-02T19:57:59.000Z</lastmod>
     <data>
         <display>
         <title>实现一个简单优雅的Flask表单验证模块</title>
         <pubTime>2016-08-22T16:40:43.000Z</pubTime>
         
-        <tag>Flask</tag>
-         
         <tag>Python</tag>
+         
+        <tag>Flask</tag>
          
          
            

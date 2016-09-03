@@ -1,0 +1,670 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Wang Haowei - ℙƴ☂ℌøἤ Programmer" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="什么？你不是Python程序员么，怎么跑过来吹JavaScript了？窃以为只有幼稚的程序员才会偏执于一两门语言，故步自封，优秀的程序员就会知道博览众长，纳为己用。 JavaScript， 这门神奇的语言，从20年前一个礼拜就设计完成的玩具语言，经过岁月的洗礼，如今已经登上大雅之堂，从浏览器到服务器，甚至到嵌入式系统，JavaScript无处不在，如果一个程序员现在还对JavaScript不屑一顾">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Beauty of Morden JavaScript">
+<meta property="og:url" content="http://imiliya.com/2016/09/03/Beauty-of-Morden-JavaScript/index.html">
+<meta property="og:site_name" content="Wang Haowei - ℙƴ☂ℌøἤ Programmer">
+<meta property="og:description" content="什么？你不是Python程序员么，怎么跑过来吹JavaScript了？窃以为只有幼稚的程序员才会偏执于一两门语言，故步自封，优秀的程序员就会知道博览众长，纳为己用。 JavaScript， 这门神奇的语言，从20年前一个礼拜就设计完成的玩具语言，经过岁月的洗礼，如今已经登上大雅之堂，从浏览器到服务器，甚至到嵌入式系统，JavaScript无处不在，如果一个程序员现在还对JavaScript不屑一顾">
+<meta property="og:updated_time" content="2016-09-03T06:57:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Beauty of Morden JavaScript">
+<meta name="twitter:description" content="什么？你不是Python程序员么，怎么跑过来吹JavaScript了？窃以为只有幼稚的程序员才会偏执于一两门语言，故步自封，优秀的程序员就会知道博览众长，纳为己用。 JavaScript， 这门神奇的语言，从20年前一个礼拜就设计完成的玩具语言，经过岁月的洗礼，如今已经登上大雅之堂，从浏览器到服务器，甚至到嵌入式系统，JavaScript无处不在，如果一个程序员现在还对JavaScript不屑一顾">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://imiliya.com/2016/09/03/Beauty-of-Morden-JavaScript/"/>
+
+  <title> Beauty of Morden JavaScript | Wang Haowei - ℙƴ☂ℌøἤ Programmer </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Wang Haowei - ℙƴ☂ℌøἤ Programmer</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Python! Pythoner! Pythonest!</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Beauty of Morden JavaScript
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-03T03:15:31+06:00" content="2016-09-03">
+              2016-09-03
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/03/Beauty-of-Morden-JavaScript/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/09/03/Beauty-of-Morden-JavaScript/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>什么？你不是Python程序员么，怎么跑过来吹JavaScript了？窃以为只有幼稚的程序员才会偏执于一两门语言，故步自封，优秀的程序员就会知道博览众长，纳为己用。 JavaScript， 这门神奇的语言，从20年前一个礼拜就设计完成的玩具语言，经过岁月的洗礼，如今已经登上大雅之堂，从浏览器到服务器，甚至到嵌入式系统，JavaScript无处不在，如果一个程序员现在还对JavaScript不屑一顾或者不去学习一下(也许放到两三年前这并不是什么问题)，感觉可以回去反省一下。<br><a id="more"></a></p>
+<p>本文的主题是Beauty of Morden JavaScript, 这个Morden Javascript包括ES6甚至ES7, 即便是没有正式敲定纳入standard，那些已经被各种开源项目大量使用的特性当然包含在其中。因为最近搞前端项目比较多，才能慢慢发现之前没有注意过的一些美的地方, 有时候也竟也会产生如果Python也能这样写有多好的想法。不多废话，下面开始我们的欣赏之旅。</p>
+<h2 id="Modular-JavaScript"><a href="#Modular-JavaScript" class="headerlink" title="Modular JavaScript"></a>Modular JavaScript</h2><p>没有模块机制的JS简直就是个笑话，居然要通过closure来创造namespace，真是反人类。不过现在一切都结束了，ES6引入了<code>import</code>，终于不用care蛋疼的globals了。</p>
+<p>math.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> add = (a, b) =&gt; a + b;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> name = <span class="string">'Math'</span>;</div><div class="line"><span class="keyword">const</span> negative = (a) =&gt; -a;</div></pre></td></tr></table></figure></p>
+<p><code>math.js</code>输出了<code>add</code>和<code>name</code>函数，<code>negative</code>作为模块的私有函数，不能被其他模块访问.<br>default export 让开发者选一个自己觉得一个最重要的api输出，<br>而其他想要输出的api，只需要在前面加一个export就OK。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> math <span class="string">'math'</span>; <span class="comment">// or import &#123; add &#125; from 'math';</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> name <span class="keyword">from</span> <span class="string">'math'</span>; <span class="comment">// name 可以随便改名</span></div></pre></td></tr></table></figure>
+<p>一个模块的对外的价值就在于他提供的API， 在Python里面，只要是模块中的变量(某些特殊情况除外)，都可以被其他模块直接import，<br>很容易造成一个模块写了一大坨函数，然后稀里糊涂的就全部<code>export</code>出去了，完全搞不清楚这个模块到底在干嘛。通过显示的声明export的变量，<br>程序员设计的时候就会更加不自主的思考这个模块的边界(boundary), 更能有意识的设计职责更加明确的模块。</p>
+<p>有了<code>import</code>机制, IIFE, angular的依赖注入这些老把戏，都可以退出历史舞台了，sayonara！</p>
+<h2 id="Simple-Javascript"><a href="#Simple-Javascript" class="headerlink" title="Simple Javascript"></a>Simple Javascript</h2><p>destructing<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> obj = &#123; a: <span class="number">12</span>, b: <span class="number">13</span>, c: <span class="number">14</span> &#125;;</div><div class="line"><span class="keyword">const</span> &#123; a, b, c &#125;  = obj;</div></pre></td></tr></table></figure></p>
+<p>可以直接将一个对象解构</p>
+<p>我想在Python里面做同样的事情<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">obj = &#123; &apos;a&apos;: 12, &apos;b&apos;: 13, &apos;c&apos;: 14 &#125;;</div><div class="line">a, b, c = obj;</div></pre></td></tr></table></figure></p>
+<p>结果却是 a = ‘a’, b = ‘b’, c = ‘c’。</p>
+<p>因为JS用的是pattern match，而python则是用的迭代器unpack，所以<code>a, b, c = iter(obj)</code>, ehmm，At this point, JS is better ！</p>
+<p>object spread</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> obj = &#123; a: <span class="number">12</span>, b: <span class="number">13</span>, c: <span class="number">14</span> &#125;;</div><div class="line"><span class="keyword">const</span> newObj = &#123; ...obj, a: <span class="number">16</span>, d: <span class="number">18</span> &#125;;</div></pre></td></tr></table></figure>
+<p>对象展开的语法真是给人屌炸天的感觉。直接基于已有对象的属性生成新的对象。How could I achieve this in Python?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">obj = &#123; &apos;a&apos;: 12, &apos;b&apos;: 13, &apos;c&apos;: 14 &#125;;</div><div class="line">new_obj = &#123; k: v for k, v in obj.items() &#125;</div><div class="line">new_obj[&apos;a&apos;] = 16</div><div class="line">new_obj[&apos;d&apos;] = 18</div></pre></td></tr></table></figure>
+<p>不得不说JS又省了一筹.</p>
+<h2 id="Functional-JavaScript"><a href="#Functional-JavaScript" class="headerlink" title="Functional JavaScript"></a>Functional JavaScript</h2><p>我们来看一个redux库中的<code>compose</code>函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">compose</span>(<span class="params">...funcs</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (funcs.length === <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">return</span> arg =&gt; arg</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (funcs.length === <span class="number">1</span>) &#123;</div><div class="line">    <span class="keyword">return</span> funcs[<span class="number">0</span>]</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">const</span> last = funcs[funcs.length - <span class="number">1</span>]</div><div class="line">  <span class="keyword">const</span> rest = funcs.slice(<span class="number">0</span>, <span class="number">-1</span>)</div><div class="line">  <span class="keyword">return</span> (...args) =&gt; rest.reduceRight((composed, f) =&gt; f(composed), last(...args))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>你能一眼看出来这个函数是干嘛的么？<br>compose函数接收的参数是一个包含多个函数的数组funcs，并返回一个新的函数，返回函数的函数被称为高阶函数.<br>这个返回的函数接收任何可能的参数，首先让funcs数组的最后一个函数作用于这些参数生成一个base value(<code>last(...args)</code>),<br>然后从右往左，funcs中的每一个函数一次作用于上一次调用的结果，即<code>f1(f2(f3(f4(base))))</code>, 这就是<code>reduceRight</code>做的事情，如果你学过Haskell或者Scala，<br>这玩意儿可谓是见怪不怪。 如今functional programming已经在JS中起到了不可替代的作用，你不妨看看(RxJS)[<a href="https://github.com/ReactiveX/rxjs]是玩的有多么妖娆" target="_blank" rel="external">https://github.com/ReactiveX/rxjs]是玩的有多么妖娆</a>.</p>
+<p>通过这个例子我们看到,JavaScript玩起高阶函数一点也不含糊, 同时闭包仍有价值，不过是在函数式编程中大显身手而不是作为一个模块化的方案而显得不伦不类.</p>
+<h2 id="Pythonic-Javascript"><a href="#Pythonic-Javascript" class="headerlink" title="Pythonic Javascript"></a>Pythonic Javascript</h2><p>从某一天开始, 所有人都在说JavaScript也来越像Python了, 不是么？</p>
+<p>对比一下js和python版</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> [a, , b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x, ...y</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> x * y.length;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> n <span class="keyword">of</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]) &#123;</div><div class="line">  <span class="built_in">console</span>.log(n);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">idMaker</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> index = <span class="number">0</span>;</div><div class="line">  <span class="keyword">while</span>(index &lt; <span class="number">3</span>)</div><div class="line">    <span class="keyword">yield</span> index++;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">a, *, b =  [1, 2, 3]</div><div class="line"></div><div class="line">def f(x, *y):</div><div class="line">  return x * len(y)</div><div class="line"></div><div class="line">for n in [1,2,3]:</div><div class="line">  print(n)</div><div class="line"></div><div class="line">def idMaker():</div><div class="line">  index = 0:</div><div class="line">  while x &lt; 3:</div><div class="line">    yield index ++</div></pre></td></tr></table></figure>
+<p>魂淡，明明是我先的。。不过作为一个Python程序员, 看到JS这么赤裸裸的抄袭，真的是叫一个开心啊!来抄吧，抄个痛快！</p>
+<h2 id="Evoling-JavaScript"><a href="#Evoling-JavaScript" class="headerlink" title="Evoling JavaScript"></a>Evoling JavaScript</h2><p>最神奇的是这门语言的进化速度，不知道下次又有什么新的提案，感觉在模仿Python的不归路上已经越走越远……</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>JavaScript，鉴于其继承自C语言系的语法体系，可能永远不可能到达Python的优雅简洁，但是其发展的速度，却早已把Python甩开了几条街.  作为一名Python程序员，是时候学习一下JavaScript了，推荐一下<a href="https://medium.com" target="_blank" rel="external">medium.com</a>, 每天读个一两篇文章，保证你不会后悔。顺便安利一发<a href="https://twitter.com/dan_abramov" target="_blank" rel="external">Dan Abramov</a>, redux和react hot loader的作者，z真心使人钦佩。这位老师向我们展示了一名优(颜)秀(值)专(爆)业(表)的程序员应该是什么样子——扎实的coding基本功，乐于分享的精神，天马行空的创造力,对问题洞若观火的判断力, 清晰的表达能力, 一丝不苟的作风, 对细节的专注…😂 再吹就要上天了。。不过讲道理吹一下也不过分. 如果你有兴趣，不妨去<a href="https://egghead.io/courses/getting-started-with-redux" target="_blank" rel="external">egghead.io</a>学习一下redux，至于能有多少收货，我只能说靠缘分，不过即便你对JavaScript或者ES6没有什么大的概念，听听老师的讲课感受一点仙气也是不错的！</p>
+<p>个人观点:如果说代码水平决定了程序员的价值，那么人格魅力和精神诉求则是程序员真正的瑰宝。. Ask yourself, why are you coding? For money, for fun, for respect, or something else? 来，先干了这碗鸡汤!</p>
+<p>一不小心就水了一篇，下一篇带来干货，”你所不知道的unicode”。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/23/flask-form/" rel="next" title="实现一个简单优雅的Flask表单验证模块">
+                <i class="fa fa-chevron-left"></i> 实现一个简单优雅的Flask表单验证模块
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Moonshadow" />
+          <p class="site-author-name" itemprop="name">Moonshadow</p>
+          <p class="site-description motion-element" itemprop="description">Write about Python, Linux, ACG and other interesting stuffs.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/moonshadow" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/moonshadow520" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Modular-JavaScript"><span class="nav-number">1.</span> <span class="nav-text">Modular JavaScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Simple-Javascript"><span class="nav-number">2.</span> <span class="nav-text">Simple Javascript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Functional-JavaScript"><span class="nav-number">3.</span> <span class="nav-text">Functional JavaScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pythonic-Javascript"><span class="nav-number">4.</span> <span class="nav-text">Pythonic Javascript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evoling-JavaScript"><span class="nav-number">5.</span> <span class="nav-text">Evoling JavaScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">6.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Moonshadow</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'imiliya';
+      var disqus_identifier = '2016/09/03/Beauty-of-Morden-JavaScript/';
+      var disqus_title = "Beauty of Morden JavaScript";
+      var disqus_url = 'http://imiliya.com/2016/09/03/Beauty-of-Morden-JavaScript/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
