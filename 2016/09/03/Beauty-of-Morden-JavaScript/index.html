@@ -88,13 +88,13 @@
 
 <meta name="description" content="什么？你不是Python程序员么，怎么跑过来吹JavaScript了？窃以为只有愚蠢的程序员才会偏执于一两门语言，故步自封，优秀的程序员就会知道博览众长，纳为己用。 JavaScript， 这门神奇的语言，从20年前一个礼拜就设计完成的玩具语言，经过岁月的洗礼，如今已经登上大雅之堂。从浏览器到服务器，甚至到嵌入式系统，JavaScript无处不在，如果一个程序员现在还对JavaScript不屑一顾">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Beauty of Morden JavaScript">
+<meta property="og:title" content="Beauty of Modern JavaScript">
 <meta property="og:url" content="http://imiliya.com/2016/09/03/Beauty-of-Morden-JavaScript/index.html">
 <meta property="og:site_name" content="Wang Haowei - ℙƴ☂ℌøἤ Programmer">
 <meta property="og:description" content="什么？你不是Python程序员么，怎么跑过来吹JavaScript了？窃以为只有愚蠢的程序员才会偏执于一两门语言，故步自封，优秀的程序员就会知道博览众长，纳为己用。 JavaScript， 这门神奇的语言，从20年前一个礼拜就设计完成的玩具语言，经过岁月的洗礼，如今已经登上大雅之堂。从浏览器到服务器，甚至到嵌入式系统，JavaScript无处不在，如果一个程序员现在还对JavaScript不屑一顾">
-<meta property="og:updated_time" content="2016-09-03T12:13:52.000Z">
+<meta property="og:updated_time" content="2016-09-03T16:16:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Beauty of Morden JavaScript">
+<meta name="twitter:title" content="Beauty of Modern JavaScript">
 <meta name="twitter:description" content="什么？你不是Python程序员么，怎么跑过来吹JavaScript了？窃以为只有愚蠢的程序员才会偏执于一两门语言，故步自封，优秀的程序员就会知道博览众长，纳为己用。 JavaScript， 这门神奇的语言，从20年前一个礼拜就设计完成的玩具语言，经过岁月的洗礼，如今已经登上大雅之堂。从浏览器到服务器，甚至到嵌入式系统，JavaScript无处不在，如果一个程序员现在还对JavaScript不屑一顾">
 
 
@@ -118,7 +118,7 @@
 
   <link rel="canonical" href="http://imiliya.com/2016/09/03/Beauty-of-Morden-JavaScript/"/>
 
-  <title> Beauty of Morden JavaScript | Wang Haowei - ℙƴ☂ℌøἤ Programmer </title>
+  <title> Beauty of Modern JavaScript | Wang Haowei - ℙƴ☂ℌøἤ Programmer </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -248,7 +248,7 @@
             
             
               
-                Beauty of Morden JavaScript
+                Beauty of Modern JavaScript
               
             
           </h1>
@@ -314,7 +314,7 @@
       
 
       
-        <p>什么？你不是Python程序员么，怎么跑过来吹JavaScript了？窃以为只有愚蠢的程序员才会偏执于一两门语言，故步自封，优秀的程序员就会知道博览众长，纳为己用。 JavaScript， 这门神奇的语言，从20年前一个礼拜就设计完成的玩具语言，经过岁月的洗礼，如今已经登上大雅之堂。从浏览器到服务器，甚至到嵌入式系统，JavaScript无处不在，如果一个程序员现在还对JavaScript不屑一顾或者不去学习一下(也许放到两三年前这并不是什么问题)，感觉可以回去好好反省了。<a id="more"></a><br>本文的主题是Beauty of Morden JavaScript, 这个Morden Javascript包括ES6甚至ES7, 即便是没有正式敲定纳入standard，那些已经被各种开源项目大量使用的特性当然包含在其中。不多废话, Let’s enjoy it。</p>
+        <p>什么？你不是Python程序员么，怎么跑过来吹JavaScript了？窃以为只有愚蠢的程序员才会偏执于一两门语言，故步自封，优秀的程序员就会知道博览众长，纳为己用。 JavaScript， 这门神奇的语言，从20年前一个礼拜就设计完成的玩具语言，经过岁月的洗礼，如今已经登上大雅之堂。从浏览器到服务器，甚至到嵌入式系统，JavaScript无处不在，如果一个程序员现在还对JavaScript不屑一顾或者不去学习一下(也许放到两三年前这并不是什么问题)，感觉可以回去好好反省了。<a id="more"></a><br>本文的主题是Beauty of Modern JavaScript, 这个Modern Javascript包括ES6甚至ES7, 即便是没有正式敲定纳入standard，那些已经被各种开源项目大量使用的特性当然包含在其中。不多废话, Let’s enjoy it。</p>
 <h2 id="Modular-JavaScript"><a href="#Modular-JavaScript" class="headerlink" title="Modular JavaScript"></a>Modular JavaScript</h2><p>没有模块机制的JS简直就是个笑话，居然要通过closure来创造namespace，真是反人类。不过现在一切都结束了，ES6引入了<code>import</code>，终于不用再纠结令人蛋疼的globals了。</p>
 <p>math.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> add = (a, b) =&gt; a + b;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> name = <span class="string">'Math'</span>;</div><div class="line"><span class="keyword">const</span> negative = (a) =&gt; -a;</div></pre></td></tr></table></figure></p>
 <p><code>math.js</code>输出了<code>add</code>和<code>name</code>函数，<code>negative</code>作为模块的私有函数，不能被其他模块访问.  default export 让开发者选一个自己觉得一个最重要的api输出， 而其他想要输出的api，只需要在前面加一个export就OK。</p>
@@ -332,7 +332,7 @@
 <h2 id="Functional-JavaScript"><a href="#Functional-JavaScript" class="headerlink" title="Functional JavaScript"></a>Functional JavaScript</h2><p>我们来看一个Redux库中的<code>compose</code>函数</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">compose</span>(<span class="params">...funcs</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (funcs.length === <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">return</span> arg =&gt; arg</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (funcs.length === <span class="number">1</span>) &#123;</div><div class="line">    <span class="keyword">return</span> funcs[<span class="number">0</span>]</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">const</span> last = funcs[funcs.length - <span class="number">1</span>]</div><div class="line">  <span class="keyword">const</span> rest = funcs.slice(<span class="number">0</span>, <span class="number">-1</span>)</div><div class="line">  <span class="keyword">return</span> (...args) =&gt; rest.reduceRight((composed, f) =&gt; f(composed), last(...args))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>你能一眼看出来这个函数是干嘛的么？ compose函数接收的参数是一个包含多个函数的数组funcs，并返回一个新的函数，返回函数的函数被称为高阶函数.  这个返回的函数接收任何可能的参数，首先让funcs数组的最后一个函数作用于这些参数生成一个base value(<code>last(...args)</code>), 然后从右往左，funcs中的每一个函数依次作用于上一次调用的结果，即<code>f1(f2(f3(f4(base))))</code>, 这就是<code>reduceRight</code>做的事情，如果你学过Haskell或者Scala， 这玩意儿可谓是见怪不怪。 如今functional programming已经在JS中起到了不可替代的作用，你不妨看看<a href="https://github.com/ReactiveX/rxjs" target="_blank" rel="external">RxJS</a>是玩的有多么妖娆.  </p>
-<p>通过这个例子我们看到,JavaScript玩起高阶函数一点也不含糊, 同时闭包仍有价值，不过是在函数式编程中大放异彩而不是作为一个模块化的方案而显得不伦不类.</p>
+<p>通过这个例子我们看到,JavaScript玩起高阶函数一点也不含糊, 同时闭包仍有价值，却是在函数式编程中大放异彩而非作为一个模块化的方案显得不伦不类.</p>
 <h2 id="Pythonic-Javascript"><a href="#Pythonic-Javascript" class="headerlink" title="Pythonic Javascript"></a>Pythonic Javascript</h2><p>从某一天开始, 所有人都在说JavaScript也来越像Python了, 不是么？</p>
 <p>对比一下js和python版</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> [a, , b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x, ...y</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> x * y.length;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> n <span class="keyword">of</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]) &#123;</div><div class="line">  <span class="built_in">console</span>.log(n);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">idMaker</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> index = <span class="number">0</span>;</div><div class="line">  <span class="keyword">while</span>(index &lt; <span class="number">3</span>)</div><div class="line">    <span class="keyword">yield</span> index++;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">func</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'call before'</span>);</div><div class="line">    result = func(...args);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'call after'</span>);</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@log</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> a + b;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -656,7 +656,7 @@
     <script type="text/javascript">
       var disqus_shortname = 'imiliya';
       var disqus_identifier = '2016/09/03/Beauty-of-Morden-JavaScript/';
-      var disqus_title = "Beauty of Morden JavaScript";
+      var disqus_title = "Beauty of Modern JavaScript";
       var disqus_url = 'http://imiliya.com/2016/09/03/Beauty-of-Morden-JavaScript/';
 
       function run_disqus_script(disqus_script){
